@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>入社準備ガイド — Bremen Inc.</title>
 <script type="application/ld+json" id="ai-metadata">
 { "@context": "http://schema.org", "@type": "HowTo", "name": "入社準備ガイド", "tool": ["Slack","Lolipop"], "estimatedTime": "20M" }
@@ -730,15 +731,32 @@ function initPasswords() {
 
 function maskPasswords() {
     var masked = '••••••••  （24時間経過のため非表示）';
+    var maskedAddr = '••••••••••••••••  （24時間経過のため非表示）';
+
+    // メールアドレス
+    var elEmail = document.getElementById('val-email');
+    if (elEmail) { elEmail.textContent = maskedAddr; elEmail.style.color = '#aaa'; elEmail.style.fontSize = '13px'; }
+    var btnEmail = document.querySelector('[aria-label="メールアドレスをコピー"]');
+    if (btnEmail) { btnEmail.disabled = true; btnEmail.style.opacity = '0.4'; }
+
+    // ロリポップ メールパスワード
     var elMail  = document.getElementById('val-pw');
     var elSlack = document.getElementById('val-slackpw');
     if (elMail)  { elMail.textContent  = masked; elMail.style.color = '#aaa'; elMail.style.fontSize = '13px'; }
     if (elSlack) { elSlack.textContent = masked; elSlack.style.color = '#aaa'; elSlack.style.fontSize = '13px'; }
+
+    // Step1・Step5 の初期パスワード表示欄もマスク
+    var el1 = document.getElementById('step1-current-mailpw');
+    var el5 = document.getElementById('step5-current-slackpw');
+    if (el1) { el1.textContent = '••••••••'; el1.style.color = '#aaa'; }
+    if (el5) { el5.textContent = '••••••••'; el5.style.color = '#aaa'; }
+
     // コピーボタンを無効化
     var btnMail  = document.getElementById('copy-btn-mailpw');
     var btnSlack = document.getElementById('copy-btn-slackpw');
     if (btnMail)  { btnMail.disabled  = true; btnMail.style.opacity  = '0.4'; }
     if (btnSlack) { btnSlack.disabled = true; btnSlack.style.opacity = '0.4'; }
+
     // 期限切れ案内を表示
     var notice = document.getElementById('pw-expiry-notice');
     if (notice) notice.style.display = 'block';
