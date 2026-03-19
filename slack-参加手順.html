@@ -386,16 +386,34 @@
             <ol style="margin:6px 0 0; padding-left:20px; font-size:14px; line-height:2;">
                 <li>ロリポップ Webメールにログインした状態で、画面右上の <strong>歯車アイコン（⚙）</strong> をタップ</li>
                 <li>「<strong>パスワードの変更</strong>」を選択</li>
-                <li>現在のパスワード（支給品のもの）と、新しいパスワードを入力して保存</li>
+                <li>「現在のパスワード」欄に初期パスワード <strong id="step1-current-mailpw" style="font-family:monospace; color:var(--red);"></strong> を入力</li>
+                <li>「新しいパスワード」欄に自分で決めたパスワードを入力して保存</li>
             </ol>
             <a href="https://webmail.lolipop.jp/login/" target="_blank" rel="noopener">
                 <span class="material-icons" style="font-size:16px;">open_in_new</span>
                 ロリポップ！Webメールを開く
             </a>
         </div>
+
+        <p style="font-weight:bold; margin:18px 0 4px; font-size:14px;">📋 新しいパスワードを入力してコピー</p>
+        <p style="font-size:13px; color:#5f6368; margin:0 0 8px;">ここで決めたパスワードは Step 7 の廣瀬さんへの報告文に自動で反映されます。</p>
+        <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+            <input id="input-new-mailpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
+                style="flex:1; border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
+            <button class="copy-btn" onclick="copyInputVal('input-new-mailpw',this)" aria-label="入力したパスワードをコピー">
+                <span class="material-icons">content_copy</span>コピー
+            </button>
+        </div>
+        <p style="font-size:12px; color:#5f6368; margin:0 0 16px; padding:8px 12px; background:#f8f9fa; border-radius:8px; line-height:1.8;">
+            <strong>🔑 ロリポップのパスワード条件</strong><br>
+            半角英数字・記号を組み合わせた 8〜32 文字<br>
+            使える記号：! @ # $ % ^ &amp; * _ - + = など<br>
+            例）Tsub@2026! のように英大文字・数字・記号を混ぜると安全
+        </p>
+
         <div class="caution-box">
-            ⚠️ 変更後のパスワードは<strong>廣瀬さんに Slack で報告</strong>してください（Step 7 で案内します）。<br>
-            Step 7 の入力欄にパスワードを入力すると報告文が自動で完成します。
+            ⚠️ 変更後のパスワードは<strong>廣瀬さんに Slack で報告</strong>してください（Step 7 で自動的に報告文が完成します）。
         </div>
         <div class="task-item" data-task="1b" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
@@ -489,14 +507,34 @@
             <div class="step-badge">5</div>
             <h2>Slack のパスワードを設定してログインする</h2>
         </div>
-        <p>初回参加時に Slack のパスワード設定を求められます。自分で決めた好きなパスワードを入力してください。<br>次回からは <strong>k.tsubaki@bremen.band ＋ 設定したパスワード</strong> でログインできます。</p>
+        <p>招待メールから参加フローに進むと、Slack のパスワード設定画面が表示されます。自分で決めた好きなパスワードを入力してください。<br>次回からは <strong>k.tsubaki@bremen.band ＋ 設定したパスワード</strong> でログインできます。</p>
         <div class="ui-mockup">
             <div class="ui-header">Slack — パスワードを設定</div>
             <div class="ui-body">
-                <p style="margin:0 0 8px;">パスワード（自分で考えたもの）→ <strong style="color:var(--red);">ここに入力 👈</strong></p>
-                <p style="margin:0; padding:8px; border:1px solid #ccc; border-radius:4px; font-family:monospace;">••••••••</p>
+                <p style="margin:0 0 4px; font-size:13px; color:#5f6368;">初期パスワード（支給品）</p>
+                <p style="margin:0 0 10px; padding:8px 12px; background:#fff3cd; border:1px solid #f9a825; border-radius:6px; font-family:monospace; font-weight:bold;" id="step5-current-slackpw"></p>
+                <p style="margin:0 0 4px; font-size:13px; color:#5f6368;">新しいパスワード（自分で決める）</p>
+                <p style="margin:0; padding:8px; border:1px solid #ccc; border-radius:4px; font-family:monospace; color:#aaa;">••••••••  ← ここに入力</p>
             </div>
         </div>
+
+        <p style="font-weight:bold; margin:18px 0 4px; font-size:14px;">📋 新しいパスワードを入力してコピー</p>
+        <p style="font-size:13px; color:#5f6368; margin:0 0 8px;">ここで決めたパスワードは Step 7 の廣瀬さんへの報告文に自動で反映されます。</p>
+        <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+            <input id="input-new-slackpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
+                style="flex:1; border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
+            <button class="copy-btn" onclick="copyInputVal('input-new-slackpw',this)" aria-label="入力したパスワードをコピー">
+                <span class="material-icons">content_copy</span>コピー
+            </button>
+        </div>
+        <p style="font-size:12px; color:#5f6368; margin:0 0 16px; padding:8px 12px; background:#f8f9fa; border-radius:8px; line-height:1.8;">
+            <strong>🔑 Slack のパスワード条件</strong><br>
+            半角英数字・記号を含む <strong>8 文字以上</strong><br>
+            英大文字・英小文字・数字をそれぞれ 1 文字以上含むこと<br>
+            例）Brm@2026!s のように英大文字・数字・記号を混ぜると安全
+        </p>
+
         <div class="task-item" data-task="5" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>Slack にログインできて、Bremen Inc. が表示された</span>
@@ -536,21 +574,10 @@
             <div class="step-badge">7</div>
             <h2>廣瀬さんへ変更後のパスワードを報告する</h2>
         </div>
-        <p>ロリポップと Slack のパスワードを変更したら、廣瀬さんへ Slack でご報告ください。<br>下の入力欄に新しいパスワードを入れると、報告文に自動で反映されます。</p>
-
-        <div style="display:flex; flex-direction:column; gap:10px; margin:14px 0;">
-            <label style="font-size:13px; font-weight:bold; color:#5f6368;">ロリポップ メールの新しいパスワード</label>
-            <input id="input-new-mailpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
-                style="border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
-                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
-            <label style="font-size:13px; font-weight:bold; color:#5f6368;">Slack の新しいパスワード</label>
-            <input id="input-new-slackpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
-                style="border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
-                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
-        </div>
+        <p>Step 1・5 で入力したパスワードが下の報告文に自動で反映されます。コピーして廣瀬さんの DM に貼り付けてください。</p>
 
         <div class="info-box" style="flex-direction:column; gap:0;">
-            <strong>💬 報告メッセージ（入力すると自動で反映されます）</strong>
+            <strong>💬 報告メッセージ（Step 1・5 の入力内容が自動で反映）</strong>
             <p id="val-pw-report" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;"></p>
             <div style="display:flex; flex-wrap:wrap; gap:8px;">
                 <button class="copy-btn" style="align-self:flex-start;" onclick="copyVal('val-pw-report',this)" aria-label="報告文をコピー">
@@ -689,6 +716,12 @@ function initPasswords() {
         if (elMail)  elMail.textContent  = _MP;
         if (elSlack) elSlack.textContent = _SP;
 
+        // Step1・Step5 の「現在のパスワード」欄にも初期値を表示
+        var el1 = document.getElementById('step1-current-mailpw');
+        var el5 = document.getElementById('step5-current-slackpw');
+        if (el1) el1.textContent = _MP;
+        if (el5) el5.textContent = _SP;
+
         // 残り時間で自動マスクのタイマーをセット
         var remaining = PW_EXPIRY_MS - (now - openedAt);
         setTimeout(maskPasswords, remaining);
@@ -758,6 +791,21 @@ function updateProgress() {
 function copyVal(elemId, btn) {
     const text = document.getElementById(elemId).textContent.trim();
     navigator.clipboard.writeText(text).then(function () {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="material-icons" style="font-size:16px;">check</span>コピー完了';
+        btn.classList.add('ok');
+        showToast('コピーしました');
+        setTimeout(function () { btn.innerHTML = orig; btn.classList.remove('ok'); }, 2000);
+    }).catch(function () {
+        showToast('コピーに失敗しました');
+    });
+}
+
+/* 入力欄の値をコピー（input要素用） */
+function copyInputVal(inputId, btn) {
+    var val = (document.getElementById(inputId) || {}).value || '';
+    if (!val.trim()) { showToast('パスワードを入力してください'); return; }
+    navigator.clipboard.writeText(val.trim()).then(function () {
         const orig = btn.innerHTML;
         btn.innerHTML = '<span class="material-icons" style="font-size:16px;">check</span>コピー完了';
         btn.classList.add('ok');
