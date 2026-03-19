@@ -128,7 +128,7 @@
     }
     .copy-btn:active { transform: scale(.96); }
     .copy-btn.ok { background: var(--success); }
-    .copy-btn .material-icons { font-size: 16px; }
+    .copy-btn .material-icons { font-size: 16px; color: #fff; }
 
     /* ===== SECTION (step card) ===== */
     .section {
@@ -465,53 +465,10 @@
         </div>
     </div>
 
-    <!-- =========================================
-         PART 3: 入社書類の準備
-    ========================================= -->
-
-    <!-- Step 6 -->
+    <!-- Step 6: 濱村さんへ挨拶 -->
     <div class="section">
         <div class="section-head">
             <div class="step-badge">6</div>
-            <h2>入社書類・口座を準備する</h2>
-        </div>
-        <p>先日はお疲れ様でした！以下を期日までにご用意ください。</p>
-
-        <p style="font-weight:bold; margin-bottom:8px;">◆ 社会保険・厚生年金関連</p>
-        <span class="deadline">3月31日 締め切り</span>
-        <div class="task-item" data-task="6" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>① マイナンバー入りの住民票</span>
-        </div>
-        <div class="task-item" data-task="7" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>② 雇用保険被保険者番号、もしくは前職名</span>
-        </div>
-        <div class="task-item" data-task="8" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>③ 年金番号がわかる書類のコピー</span>
-        </div>
-        <div class="task-item" data-task="9" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>④ 運転免許証</span>
-        </div>
-
-        <p style="font-weight:bold; margin:20px 0 8px;">◆ 事業関連</p>
-        <span class="deadline">4月15日 締め切り</span>
-        <div class="task-item" data-task="10" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>⑤ 給与用銀行口座</span>
-        </div>
-        <div class="task-item" data-task="11" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>⑥ ゆうちょ銀行口座（買取金のやりとりに使用します）</span>
-        </div>
-    </div>
-
-    <!-- Step 7: 濱村さんへ挨拶 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">7</div>
             <h2>濱村さんの Slack へ挨拶を送る</h2>
         </div>
         <p>Slack に参加できたら、まず濱村さんにダイレクトメッセージで挨拶を送りましょう。以下の参考文をそのままコピーして使えます。</p>
@@ -524,9 +481,52 @@
                 <span class="material-icons">content_copy</span>挨拶文をコピー
             </button>
         </div>
-        <div class="task-item" data-task="12" onclick="toggleTask(this)">
+        <div class="task-item" data-task="6" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>濱村さんへ Slack で挨拶を送った</span>
+        </div>
+    </div>
+
+    <!-- =========================================
+         PART 3: 入社書類の準備
+    ========================================= -->
+
+    <!-- Step 7 -->
+    <div class="section">
+        <div class="section-head">
+            <div class="step-badge">7</div>
+            <h2>入社書類・口座を準備する</h2>
+        </div>
+        <p>以下を濱村さんのDMに送信してください。</p>
+
+        <p style="font-weight:bold; margin-bottom:8px;">社会保険・厚生年金関連</p>
+        <span class="deadline">3月31日 締め切り</span>
+        <div class="task-item" data-task="7" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>① マイナンバー入りの住民票</span>
+        </div>
+        <div class="task-item" data-task="8" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>② 雇用保険被保険者番号、もしくは前職名</span>
+        </div>
+        <div class="task-item" data-task="9" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>③ 年金番号がわかる書類のコピー</span>
+        </div>
+        <div class="task-item" data-task="10" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>④ 運転免許証</span>
+        </div>
+
+        <p style="font-weight:bold; margin:20px 0 8px;">事業関連</p>
+        <span class="deadline">4月15日 締め切り</span>
+        <div class="task-item" data-task="11" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>⑤ 給与用銀行口座</span>
+        </div>
+        <div class="task-item" data-task="12" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>⑥ ゆうちょ銀行口座（買取金のやりとりに使用します）</span>
         </div>
     </div>
 
