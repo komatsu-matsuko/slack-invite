@@ -394,7 +394,8 @@
             </a>
         </div>
         <div class="caution-box">
-            ⚠️ 変更後のパスワードは<strong>廣瀬さんに Slack で報告</strong>してください（Step 7 で案内します）。
+            ⚠️ 変更後のパスワードは<strong>廣瀬さんに Slack で報告</strong>してください（Step 7 で案内します）。<br>
+            Step 7 の入力欄にパスワードを入力すると報告文が自動で完成します。
         </div>
         <div class="task-item" data-task="1b" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
@@ -529,14 +530,51 @@
         </div>
     </div>
 
+    <!-- Step 7: 廣瀬さんへパスワード報告 -->
+    <div class="section">
+        <div class="section-head">
+            <div class="step-badge">7</div>
+            <h2>廣瀬さんへ変更後のパスワードを報告する</h2>
+        </div>
+        <p>ロリポップと Slack のパスワードを変更したら、廣瀬さんへ Slack でご報告ください。<br>下の入力欄に新しいパスワードを入れると、報告文に自動で反映されます。</p>
+
+        <div style="display:flex; flex-direction:column; gap:10px; margin:14px 0;">
+            <label style="font-size:13px; font-weight:bold; color:#5f6368;">ロリポップ メールの新しいパスワード</label>
+            <input id="input-new-mailpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
+                style="border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
+            <label style="font-size:13px; font-weight:bold; color:#5f6368;">Slack の新しいパスワード</label>
+            <input id="input-new-slackpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
+                style="border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+
+        <div class="info-box" style="flex-direction:column; gap:0;">
+            <strong>💬 報告メッセージ（入力すると自動で反映されます）</strong>
+            <p id="val-pw-report" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;"></p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <button class="copy-btn" style="align-self:flex-start;" onclick="copyVal('val-pw-report',this)" aria-label="報告文をコピー">
+                    <span class="material-icons">content_copy</span>報告文をコピー
+                </button>
+                <a href="slack://user?id=U01KD66B1EW" class="copy-btn" style="text-decoration:none; background:#4a154b;" aria-label="廣瀬さんのDMを開く">
+                    <span class="material-icons" style="font-size:16px;">chat</span>廣瀬さんのDMを開く
+                </a>
+            </div>
+        </div>
+        <div class="task-item" data-task="7b" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>廣瀬さんへ変更後のパスワードを Slack で報告した</span>
+        </div>
+    </div>
+
     <!-- =========================================
          PART 3: 入社書類の準備
     ========================================= -->
 
-    <!-- Step 7 -->
+    <!-- Step 8 -->
     <div class="section">
         <div class="section-head">
-            <div class="step-badge">7</div>
+            <div class="step-badge">8</div>
             <h2>入社書類・口座を準備する</h2>
         </div>
         <p>以下を濱村さんのDMに送信してください。</p>
@@ -623,6 +661,7 @@ window.addEventListener('DOMContentLoaded', function () {
     initPasswords();
     restoreTasks();
     updateProgress();
+    updatePwReport();
 });
 
 /* ==============================
@@ -751,6 +790,19 @@ function celebrate() {
         c.style.animationDuration = (Math.random() * 3 + 2) + 's';
         document.body.appendChild(c);
     }
+}
+
+/* ==============================
+   廣瀬さんへの報告文リアルタイム更新
+============================== */
+function updatePwReport() {
+    var mailPw  = document.getElementById('input-new-mailpw')  ? document.getElementById('input-new-mailpw').value.trim()  : '';
+    var slackPw = document.getElementById('input-new-slackpw') ? document.getElementById('input-new-slackpw').value.trim() : '';
+    var mailLine  = mailPw  ? mailPw  : '（未入力）';
+    var slackLine = slackPw ? slackPw : '（未入力）';
+    var msg = '廣瀬さん、こんにちは。椿です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
+    var el = document.getElementById('val-pw-report');
+    if (el) el.textContent = msg;
 }
 
 /* ==============================
