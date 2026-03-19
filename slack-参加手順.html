@@ -186,13 +186,14 @@
     .info-box {
         background: #f0f7ff; border-left: 4px solid var(--accent-blue);
         border-radius: 10px; padding: 14px 16px; margin: 14px 0; font-size: 14px;
+        display: flex; flex-direction: column;
     }
     .info-box strong { display: block; margin-bottom: 6px; }
     .info-box a {
         display: inline-flex; align-items: center; gap: 6px;
         background: var(--accent-blue); color: #fff; text-decoration: none;
         padding: 10px 16px; border-radius: 8px; font-weight: bold;
-        font-size: 14px; margin-top: 8px;
+        font-size: 14px; margin-top: 8px; align-self: flex-start;
     }
     .caution-box {
         background: #fff8e1; border-left: 4px solid #f9a825;
@@ -400,13 +401,17 @@
             <div class="step-badge">3</div>
             <h2>Slack アプリをインストールする</h2>
         </div>
-        <p>スマホに <span class="term" data-tooltip="【Slackとは】チームでチャットや連絡を取り合うビジネス用アプリです">Slack</span> アプリをインストールしてください。</p>
-        <div class="ui-mockup">
-            <div class="ui-header">📲 App Store / Google Play</div>
-            <div class="ui-body">
-                <p style="margin:0 0 6px;">検索欄に <strong style="color:var(--red);">Slack</strong> と入力してインストール 👈</p>
-                <p style="margin:0; font-size:12px; color:#5f6368;">開発者: Slack Technologies, Inc.</p>
-            </div>
+        <p>スマホに <span class="term" data-tooltip="【Slackとは】チームでチャットや連絡を取り合うビジネス用アプリです">Slack</span> アプリをインストールしてください。下のボタンからそのまま開けます。</p>
+        <div class="info-box" style="display:flex; flex-direction:column; gap:10px;">
+            <strong>📲 ストアから直接インストール</strong>
+            <a href="https://apps.apple.com/jp/app/slack/id618783545" target="_blank" rel="noopener" style="background:#000; justify-content:center;">
+                <span class="material-icons" style="font-size:16px;">apple</span>
+                App Store でダウンロード（iPhone）
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.Slack" target="_blank" rel="noopener" style="background:#01875f; justify-content:center;">
+                <span class="material-icons" style="font-size:16px;">android</span>
+                Google Play でダウンロード（Android）
+            </a>
         </div>
         <div class="task-item" data-task="3" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
@@ -490,20 +495,38 @@
             <div class="task-checkbox"></div>
             <span>④ 運転免許証</span>
         </div>
-        <div class="task-item" data-task="10" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>⑤ ストレングス・ファインダー 診断テスト実行（追加コードは本社にて配布）</span>
-        </div>
 
         <p style="font-weight:bold; margin:20px 0 8px;">◆ 事業関連</p>
         <span class="deadline">4月15日 締め切り</span>
+        <div class="task-item" data-task="10" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>⑤ 給与用銀行口座</span>
+        </div>
         <div class="task-item" data-task="11" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
-            <span>⑥ 給与用銀行口座</span>
+            <span>⑥ ゆうちょ銀行口座（買取金のやりとりに使用します）</span>
+        </div>
+    </div>
+
+    <!-- Step 7: 濱村さんへ挨拶 -->
+    <div class="section">
+        <div class="section-head">
+            <div class="step-badge">7</div>
+            <h2>濱村さんの Slack へ挨拶を送る</h2>
+        </div>
+        <p>Slack に参加できたら、まず濱村さんにダイレクトメッセージで挨拶を送りましょう。以下の参考文をそのままコピーして使えます。</p>
+        <div class="info-box" style="flex-direction:column; gap:0;">
+            <strong>💬 参考メッセージ（コピーして使ってください）</strong>
+            <p id="val-greet" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;">濱村さん、こんにちは！
+このたびお世話になります、椿（k.tsubaki@bremen.band）です。
+本日より Slack に参加しました。どうぞよろしくお願いいたします。</p>
+            <button class="copy-btn" style="align-self:flex-start;" onclick="copyVal('val-greet',this)" aria-label="挨拶文をコピー">
+                <span class="material-icons">content_copy</span>挨拶文をコピー
+            </button>
         </div>
         <div class="task-item" data-task="12" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
-            <span>⑦ ゆうちょ銀行口座（買取金のやりとりに使用します）</span>
+            <span>濱村さんへ Slack で挨拶を送った</span>
         </div>
     </div>
 
