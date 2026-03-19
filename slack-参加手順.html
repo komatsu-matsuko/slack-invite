@@ -363,6 +363,28 @@
             <div class="task-checkbox"></div>
             <span>ロリポップWebメールにログインして、受信トレイを確認した</span>
         </div>
+
+        <p style="font-weight:bold; margin:20px 0 6px;">🔐 メールパスワードを自分のものに変更する</p>
+        <p style="font-size:14px; color:#5f6368; margin:0 0 10px;">支給されたパスワードは初期値です。ログイン後すぐに自分だけが知るパスワードに変更してください。</p>
+        <div class="info-box" style="flex-direction:column; gap:8px;">
+            <strong>⚙️ パスワード変更の手順</strong>
+            <ol style="margin:6px 0 0; padding-left:20px; font-size:14px; line-height:2;">
+                <li>ロリポップ Webメールにログインした状態で、画面右上の <strong>歯車アイコン（⚙）</strong> をタップ</li>
+                <li>「<strong>パスワードの変更</strong>」を選択</li>
+                <li>現在のパスワード（支給品のもの）と、新しいパスワードを入力して保存</li>
+            </ol>
+            <a href="https://webmail.lolipop.jp/login/" target="_blank" rel="noopener">
+                <span class="material-icons" style="font-size:16px;">open_in_new</span>
+                ロリポップ！Webメールを開く
+            </a>
+        </div>
+        <div class="caution-box">
+            ⚠️ 変更後のパスワードは<strong>廣瀬さんに Slack で報告</strong>してください（Step 7 で案内します）。
+        </div>
+        <div class="task-item" data-task="1b" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>ロリポップのメールパスワードを自分のものに変更した</span>
+        </div>
     </div>
 
     <!-- Step 2 -->
@@ -477,9 +499,14 @@
             <p id="val-greet" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;">濱村さん、こんにちは！
 このたびお世話になります、椿（k.tsubaki@bremen.band）です。
 本日より Slack に参加しました。どうぞよろしくお願いいたします。</p>
-            <button class="copy-btn" style="align-self:flex-start;" onclick="copyVal('val-greet',this)" aria-label="挨拶文をコピー">
-                <span class="material-icons">content_copy</span>挨拶文をコピー
-            </button>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <button class="copy-btn" style="align-self:flex-start;" onclick="copyVal('val-greet',this)" aria-label="挨拶文をコピー">
+                    <span class="material-icons">content_copy</span>挨拶文をコピー
+                </button>
+                <a href="slack://user?id=D01KBJMJ51U" class="copy-btn" style="text-decoration:none; background:#4a154b;" aria-label="濱村さんのDMを開く">
+                    <span class="material-icons" style="font-size:16px;">chat</span>濱村さんのDMを開く
+                </a>
+            </div>
         </div>
         <div class="task-item" data-task="6" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
@@ -487,14 +514,41 @@
         </div>
     </div>
 
+    <!-- Step 7: 廣瀬さんへパスワード報告 -->
+    <div class="section">
+        <div class="section-head">
+            <div class="step-badge">7</div>
+            <h2>廣瀬さんへ変更後のパスワードを報告する</h2>
+        </div>
+        <p>ロリポップのメールパスワードを変更したら、廣瀬さんへ Slack でご報告ください。下のボタンでDMをすぐ開けます。</p>
+        <div class="info-box" style="flex-direction:column; gap:0;">
+            <strong>💬 参考メッセージ（コピーして使ってください）</strong>
+            <p id="val-pw-report" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;">廣瀬さん、こんにちは。椿です。
+ロリポップのメールパスワードを変更しました。
+新しいパスワード：（ここに入力してから送信してください）</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <button class="copy-btn" style="align-self:flex-start;" onclick="copyVal('val-pw-report',this)" aria-label="報告文をコピー">
+                    <span class="material-icons">content_copy</span>報告文をコピー
+                </button>
+                <a href="slack://user?id=U01KD66B1EW" class="copy-btn" style="text-decoration:none; background:#4a154b;" aria-label="廣瀬さんのDMを開く">
+                    <span class="material-icons" style="font-size:16px;">chat</span>廣瀬さんのDMを開く
+                </a>
+            </div>
+        </div>
+        <div class="task-item" data-task="7b" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>廣瀬さんへ変更後のパスワードを Slack で報告した</span>
+        </div>
+    </div>
+
     <!-- =========================================
          PART 3: 入社書類の準備
     ========================================= -->
 
-    <!-- Step 7 -->
+    <!-- Step 8 -->
     <div class="section">
         <div class="section-head">
-            <div class="step-badge">7</div>
+            <div class="step-badge">8</div>
             <h2>入社書類・口座を準備する</h2>
         </div>
         <p>以下を濱村さんのDMに送信してください。</p>
