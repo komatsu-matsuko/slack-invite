@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slack 参加手順</title>
+<script type="application/ld+json" id="ai-metadata">
+{ "@context": "http://schema.org", "@type": "HowTo", "name": "Slack 参加手順", "tool": ["Slack"], "estimatedTime": "10M" }
+</script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    :root { --primary: #FFE000; --primary-text: #111111; --accent-blue: #0063AF; --frame-color: #00508C; --success: #1e8e3e; --bg: #f8f9fa; --completed-bg: #C6E7FA; --surface: #ffffff; --border: #dadce0; }
+    body { font-family: 'Google Sans', Roboto, Arial, sans-serif; background-color: var(--bg); color: #202124; line-height: 1.6; margin: 0; padding: 40px 20px 160px 20px; transition: background-color 1.5s ease; }
+    body.completed { background-color: var(--completed-bg) !important; }
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* Header & Diagram & KeyBox */
+    header { text-align: center; background: white; padding: 50px 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 40px; border-top: 10px solid var(--primary); overflow: hidden; }
+    .mission-label { background: var(--primary); color: var(--primary-text); display: inline-block; padding: 5px 15px; border-radius: 99px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 15px; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    h1 { margin: 0; color: #111; font-size: 32px; letter-spacing: 0.05em; line-height: 1.3; font-weight: 900; }
+    .title-sub { font-size: 16px; color: #5f6368; display: block; margin-top: 10px; font-weight: normal; }
+    .diagram-wrapper { background: white; padding: 30px 20px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .diagram-title { text-align: center; font-weight: 900; color: var(--accent-blue); margin-bottom: 30px; font-size: 18px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .diagram-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .d-step { flex: 1; min-width: 100px; text-align: center; position: relative; z-index: 2; }
+    .d-icon-box { width: 70px; height: 70px; background: #f0f4f8; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--frame-color); border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .d-step:hover .d-icon-box { transform: scale(1.1); color: var(--accent-blue); }
+    .d-icon-box.highlight { background: var(--primary); color: #111; border-color: var(--primary); }
+    .d-label { font-weight: 900; font-size: 14px; color: #333; margin-bottom: 5px; }
+    .d-desc { font-size: 11px; color: #666; line-height: 1.4; }
+    .d-arrow { flex: 0 0 30px; height: 2px; background: #ddd; position: relative; }
+    .d-arrow::after { content: ""; position: absolute; right: 0; top: -4px; border-left: 6px solid #ddd; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+    .key-box { background: #fff; border: 2px solid var(--primary); border-radius: 12px; padding: 25px; margin-bottom: 40px; box-shadow: 0 4px 0 rgba(0,0,0,0.05); }
+    .key-title { font-weight: 900; font-size: 18px; color: #111; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+    .key-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .key-item { background: #f8f9fa; border: 1px solid #ccc; padding: 10px 15px; border-radius: 8px; font-size: 13px; font-family: monospace; display: flex; align-items: center; gap: 8px; color: #111; font-weight: bold; }
+    .key-item .material-icons { color: var(--frame-color); }
+
+    /* Content & Steps */
+    .section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    h2 { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; color: #3c4043; }
+    .step-badge { background: var(--primary); color: var(--primary-text); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+    /* Interactive Elements & Tooltip */
+    .ui-mockup { background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 0; margin: 20px 0; font-family: Arial, sans-serif; font-size: 13px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .ui-header { background: #f1f3f4; padding: 8px 15px; border-bottom: 1px solid #ccc; color: #5f6368; font-size: 11px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+    .ui-body { padding: 15px; }
+
+    .term { border-bottom: 2px dotted #0063AF; cursor: help; position: relative; color: #0063AF; font-weight: bold; transition: all 0.2s; }
+    .term:hover { background: #e8f0fe; }
+    .term:hover::after { content: attr(data-tooltip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #202124; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); line-height: 1.4; }
+    .term:hover::before { content: ""; position: absolute; bottom: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #202124 transparent transparent transparent; z-index: 1000; }
+
+    /* Mockups (Shared) */
+    .menu-bar { display: flex; gap: 15px; color: #444; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 10px;}
+    .menu-item.active { background: #e8f0fe; color: #1a73e8; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+    .dropdown { border: 1px solid #ccc; width: 200px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 4px; margin-top: 5px; margin-left: 20px; }
+    .dropdown-item { padding: 8px 15px; display: flex; align-items: center; gap: 8px; }
+    .dropdown-item.target { background: #e8f0fe; color: #1a73e8; font-weight: bold; }
+    .lib-layout { display: flex; height: 160px; }
+    .lib-sidebar { width: 180px; background: #f8f9fa; border-right: 1px solid #eee; padding: 10px; }
+    .lib-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; color: #3c4043; font-weight: 500; font-size: 12px;}
+    .lib-main { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .lib-input { width: 100%; padding: 8px; border: 1px solid #1a73e8; border-radius: 4px; font-family: monospace; background: #fff; color: #333; }
+    .sheet-mockup { border: 1px solid #c0c0c0; background: #fff; font-family: Arial, sans-serif; font-size: 12px; color: #333; margin: 20px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; }
+    .sheet-toolbar { background: #f8f9fa; padding: 8px 15px; border-bottom: 1px solid #e0e0e0; display: flex; gap: 15px; color: #5f6368; font-size: 11px; }
+    .sheet-grid { display: grid; grid-template-columns: 40px repeat(10, 1fr); border-collapse: collapse; }
+    .sheet-cell { border-right: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; padding: 6px 8px; white-space: nowrap; overflow: hidden; }
+    .sheet-header-col { background: #f8f9fa; font-weight: bold; text-align: center; color: #5f6368; border-bottom: 2px solid #ccc; }
+    .sheet-header-row { background: #f8f9fa; font-weight: bold; text-align: center; color: #5f6368; }
+    .sheet-data-header { font-weight: bold; background: #fff; border-bottom: 2px solid #1a73e8; color: #333; }
+    .sheet-tabs { background: #f1f3f4; padding: 0; border-top: 1px solid #e0e0e0; display: flex; align-items: flex-end; height: 35px; }
+    .sheet-tab { background: #fff; padding: 8px 25px; border-radius: 5px 5px 0 0; color: #1a73e8; font-weight: bold; box-shadow: 0 -1px 3px rgba(0,0,0,0.05); margin-left: 50px; position: relative; }
+    .pointer { position: absolute; left: -50px; top: 10px; color: #d93025; font-weight: bold; animation: bounce 1s infinite; }
+    @keyframes bounce { 0%, 100% {transform:translateX(0);} 50% {transform:translateX(5px);} }
+    .exec-toolbar { background: #fff; border-bottom: 1px solid #dadce0; padding: 10px; display: flex; align-items: center; gap: 15px; border-radius: 8px 8px 0 0; border: 1px solid #ccc; }
+    .exec-dropdown { background: #fff; border: 1px solid #dadce0; padding: 6px 10px; border-radius: 4px; font-size: 12px; color: #3c4043; min-width: 120px; display: flex; justify-content: space-between; align-items: center; }
+    .exec-btn { background: #fff; color: #3c4043; border: 1px solid #dadce0; border-radius: 4px; padding: 6px 15px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .exec-btn:hover { background: #f8f9fa; color: #1a73e8; }
+
+    /* Code & Copy */
+    .code-wrapper { position: relative; margin-top: 15px; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 5px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 5px; z-index: 10; }
+    .copy-btn:hover { background: rgba(255,255,255,0.25); }
+    .copy-btn.copied { background: var(--success); border-color: var(--success); }
+    .code-block { background: #282c34; color: #abb2bf; padding: 40px 20px 20px 20px; border-radius: 8px; overflow-x: auto; font-family: Consolas, monospace; font-size: 12px; }
+    .id-box { background: #f0f7ff; border: 2px solid #0063AF; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; }
+    .id-value { font-family: monospace; font-weight: bold; font-size: 14px; color: #0063AF; display: block; margin-bottom: 5px; word-break: break-all; }
+
+    /* Task & Progress */
+    .task-item { display: flex; align-items: center; gap: 15px; padding: 12px; border: 1px solid #eee; border-radius: 8px; margin-top: 10px; cursor: pointer; transition: background 0.2s; background: #fff; }
+    .task-item:hover { background: #f0f7ff; }
+    .task-checkbox { width: 22px; height: 22px; border: 2px solid var(--success); border-radius: 6px; background: white; display: flex; align-items: center; justify-content: center; color: var(--success); font-weight: bold; font-size: 16px; transition: all 0.2s; }
+    .task-item.checked { background: #e6f4ea; border-color: var(--success); }
+    .task-item.checked .task-checkbox { background: var(--success); color: white; }
+    .task-item.checked .task-checkbox::after { content: "✔"; }
+
+    /* Footer & Admin */
+    .footer-actions { text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px dashed #ddd; }
+    .fix-btn { background: #f8f9fa; border: 1px solid #ddd; color: #5f6368; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .fix-btn:hover { background: #333; color: white; border-color: #333; }
+
+    /* Error & Gemini */
+    .error-guide { background: #fff; border: 1px solid #e0e0e0; padding: 20px; margin-top: 30px; border-radius: 8px; }
+    .console-mockup { background: #ffffff; color: #333; padding: 0; font-family: Consolas, monospace; font-size: 12px; border-radius: 4px; margin: 10px 0; border: 1px solid #dadce0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); }
+    .console-header { background: #f1f3f4; padding: 5px 10px; border-bottom: 1px solid #e0e0e0; color: #5f6368; font-size: 11px; font-weight: bold; }
+    .console-body { padding: 10px; line-height: 1.5; }
+    .log-info { color: #5f6368; margin-bottom: 4px; }
+    .log-error { color: #d93025; background: #fce8e6; display: block; width: 100%; padding: 2px 0; }
+    .gemini-box { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 12px; padding: 15px; margin-top: 15px; }
+    .gemini-header { display: flex; align-items: center; gap: 8px; font-weight: bold; color: #4285f4; margin-bottom: 10px; }
+    .prompt-box { background: #fff; padding: 10px; border-radius: 8px; font-size: 12px; color: #333; border:1px solid #ddd; }
+    .privacy-badge { display: inline-block; background: #e8eaed; color: #5f6368; font-size: 10px; padding: 3px 8px; border-radius: 10px; margin-left: auto; }
+
+    .progress-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 800px; height: 60px; z-index: 1000; display: flex; align-items: center; pointer-events: none; }
+    .progress-frame { width: 100%; height: 24px; background: var(--frame-color); border-radius: 999px; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
+    .progress-bar { width: 0%; height: 100%; background: var(--primary); border-radius: 999px; transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; }
+    .progress-char { position: absolute; right: -25px; top: -38px; width: 50px; height: 50px; transition: right 0.5s ease; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+    .progress-char img { width: 100%; height: 100%; object-fit: contain; }
+    .confetti { position: fixed; width: 10px; height: 10px; background-color: #f00; animation: fall linear forwards; z-index: 9999; pointer-events: none; }
+    @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="mission-label">MISSION</span>
+        <h1>Slack（Bremen Inc.）に参加する</h1>
+        <span class="title-sub">スマホからログインして使うまで</span>
+    </header>
+
+    <div class="diagram-wrapper">
+        <div class="diagram-title">
+            <span class="material-icons">account_tree</span>
+            これが完了するとどうなる？
+        </div>
+        <p style="text-align: center; margin-bottom: 24px; color: #5f6368; font-size: 14px;">スマホから Bremen Inc. の <span class="term" data-tooltip="【Slackとは】チームでチャットや連絡を取り合うアプリです">Slack</span> に参加し、チャットや通知を見られる状態になります。</p>
+        <div class="diagram-container">
+            <div class="d-step">
+                <div class="d-icon-box"><span class="material-icons" style="font-size:32px;">mail</span></div>
+                <div class="d-label">メール確認</div>
+                <div class="d-desc">招待メールを開く</div>
+            </div>
+            <div class="d-arrow"></div>
+            <div class="d-step">
+                <div class="d-icon-box"><span class="material-icons" style="font-size:32px;">get_app</span></div>
+                <div class="d-label">Slack インストール</div>
+                <div class="d-desc">アプリを入れる</div>
+            </div>
+            <div class="d-arrow"></div>
+            <div class="d-step">
+                <div class="d-icon-box"><span class="material-icons" style="font-size:32px;">link</span></div>
+                <div class="d-label">招待で参加</div>
+                <div class="d-desc">リンクをタップ</div>
+            </div>
+            <div class="d-arrow"></div>
+            <div class="d-step">
+                <div class="d-icon-box"><span class="material-icons" style="font-size:32px;">lock</span></div>
+                <div class="d-label">ログイン</div>
+                <div class="d-desc">パスワード設定</div>
+            </div>
+            <div class="d-arrow"></div>
+            <div class="d-step">
+                <div class="d-icon-box highlight"><span class="material-icons" style="font-size:32px;">smartphone</span></div>
+                <div class="d-label">スマホで利用</div>
+                <div class="d-desc">完了</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="key-box">
+        <div class="key-title">
+            <span class="material-icons">vpn_key</span>
+            支給品（必要な情報）
+        </div>
+        <p style="font-size: 12px; color: #5f6368; margin-bottom: 15px;">※このページは本人だけに渡し、URLの転送・公開に注意してください。パスワードが含まれています。</p>
+        <div class="key-list">
+            <div class="key-item" data-ai-type="credential-key">
+                <span class="material-icons">email</span>
+                <span>メールアドレス: k.tsubaki@bremen.band</span>
+            </div>
+            <div class="key-item" data-ai-type="credential-key">
+                <span class="material-icons">lock</span>
+                <span>ロリポップメールパスワード: G7k_L2x9PqR8mN</span>
+            </div>
+            <div class="key-item">
+                <span class="material-icons">workspaces</span>
+                <span>ワークスペース名: Bremen Inc.</span>
+            </div>
+            <div class="key-item">
+                <span class="material-icons">link</span>
+                <span>URL: https://bremenband.slack.com</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" data-ai-type="step">
+        <h2><span class="step-badge">0</span> 招待メールを確認する</h2>
+        <p>スマホのメールアプリ、または <span class="term" data-tooltip="【ロリポップとは】レンタルサーバー・メールのサービスです。bremen.band のメールはここで管理されています">ロリポップ</span> の <span class="term" data-tooltip="【Webメールとは】ブラウザでログインしてメールを読む機能です">Webメール</span> で <strong>k.tsubaki@bremen.band</strong> に届いた <span class="term" data-tooltip="【招待メールとは】Slack のワークスペースに参加するためのリンクが入ったメールです">Slack の招待メール</span> を開いてください。</p>
+        <div class="ui-mockup" data-ai-type="ui-simulation">
+            <div class="ui-header">📱 メールアプリ</div>
+            <div class="ui-body">
+                <p style="margin:0 0 8px 0; color:#5f6368; font-size:11px;">受信トレイ</p>
+                <p style="margin:0; padding:10px; background:#f8f9fa; border-radius:6px; border-left:3px solid var(--accent-blue);"><strong>Slack</strong> から 「Bremen Inc. のワークスペースに参加しましょう」<br><span style="color:#d93025; font-weight:bold;">👈 このメールを開く</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" data-ai-type="step">
+        <h2><span class="step-badge">1</span> Slack アプリをインストールする</h2>
+        <p>まだ <span class="term" data-tooltip="【Slackとは】チームでチャットや連絡を取り合うアプリです">Slack</span> を入れていない場合、スマホの <strong>App Store</strong>（iPhone）または <strong>Google Play</strong>（Android）で「Slack」を検索し、インストールしてください。</p>
+        <div class="ui-mockup" data-ai-type="ui-simulation">
+            <div class="ui-header">📲 ストアで検索</div>
+            <div class="ui-body">
+                <p style="margin:0 0 8px 0;">検索欄に <span style="color:#d93025; font-weight:bold;">Slack</span> と入力 👈</p>
+                <p style="margin:0; font-size:12px; color:#5f6368;">「Slack」アプリをタップして「インストール」</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" data-ai-type="step">
+        <h2><span class="step-badge">2</span> ワークスペースに参加する</h2>
+        <p>招待メールの中にある <span class="term" data-tooltip="【招待リンクとは】タップするとSlackのワークスペースに参加できるURLです">「Bremen Inc. に参加」</span> または「ワークスペースに参加」のボタン（リンク）を <span style="color:#d93025; font-weight:bold;">タップ</span> してください。スマホの Slack アプリが開き、<span class="term" data-tooltip="【ワークスペースとは】Slackで、ひとつの会社やチームが使う場のこと">ワークスペース</span>に参加する流れになります。</p>
+        <p style="margin-top:12px;">メールが開けない場合は、Slack アプリを起動し「メールでサインイン」→ 上記のメールアドレス <strong>k.tsubaki@bremen.band</strong> を入力し、届いたメールのリンクで認証してください。</p>
+        <div class="ui-mockup" data-ai-type="ui-simulation">
+            <div class="ui-header">📧 招待メール本文</div>
+            <div class="ui-body">
+                <p style="margin:0 0 12px 0;">Bremen Inc. に参加するよう招待されています。</p>
+                <p style="margin:0; padding:12px; background:#e8f0fe; color:#1a73e8; border-radius:8px; font-weight:bold; text-align:center;"><span style="color:#d93025; font-weight:bold;">👈 「Bremen Inc. に参加」をタップ</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" data-ai-type="step">
+        <h2><span class="step-badge">3</span> 初回はパスワードを作成する</h2>
+        <p>招待から初めて参加するとき、Slack がパスワードの設定を求めることがあります。好きなパスワードを入力して設定してください。次回からは「メールアドレス + このパスワード」でログインできます。</p>
+        <div class="ui-mockup" data-ai-type="ui-simulation">
+            <div class="ui-header">Slack — パスワードを設定</div>
+            <div class="ui-body">
+                <p style="margin:0 0 8px 0;">パスワード <span style="color:#d93025; font-weight:bold;">👈 ここに入力</span></p>
+                <p style="margin:0; padding:8px; border:1px solid #ccc; border-radius:4px; font-family:monospace;">••••••••</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" data-ai-type="step">
+        <h2><span class="step-badge">4</span> 参加完了の確認</h2>
+        <p>画面に <strong>Bremen Inc.</strong> というワークスペース名や、チャンネル一覧が表示されていれば参加完了です。以下をチェックして進捗を確認しましょう。</p>
+        <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>招待メールを開いた</span>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>Slack アプリをインストールした</span>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>招待リンクをタップして参加した</span>
+        </div>
+        <div class="task-item" onclick="toggleTask(this)">
+            <div class="task-checkbox"></div>
+            <span>Bremen Inc. が表示されて使える</span>
+        </div>
+    </div>
+
+    <div class="footer-actions">
+        <button class="fix-btn" onclick="copyHtmlForUpdate()">
+            <span class="material-icons" style="font-size:14px;">update</span> 管理者用：最新環境へアップデート
+        </button>
+        <p style="margin-top:5px; font-size:10px;">現在のコードと更新用プロンプトをコピーします。</p>
+    </div>
+</div>
+
+<div class="progress-container">
+  <div class="progress-frame">
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-char">
+        <img src="https://yutani8013f70550-cmqpt.wordpress.com/wp-content/uploads/2026/02/e3818ae38198e382ade383a3e38383e38388-e9a194e381a0e38191.png" alt="cat">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let totalTasks = 0; let completedTasks = 0;
+  function init() { totalTasks = document.querySelectorAll('.task-item').length; updateProgress(); }
+  function toggleTask(el) { if (el.classList.contains('checked')) { el.classList.remove('checked'); completedTasks--; } else { el.classList.add('checked'); completedTasks++; } updateProgress(); }
+  function updateProgress() { const pct = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100); const bar = document.getElementById('progressBar'); bar.style.width = pct + '%'; if (pct === 100) celebrate(); }
+  function celebrate() { if (document.body.classList.contains('completed')) return; document.body.classList.add('completed'); createConfetti(); }
+  function copyCode(btn) { const code = btn.nextElementSibling.innerText; navigator.clipboard.writeText(code).then(() => { const originalText = btn.innerHTML; btn.innerHTML = '<span class="material-icons" style="font-size:14px;">check</span> 完了'; btn.classList.add('copied'); setTimeout(() => { btn.innerHTML = originalText; btn.classList.remove('copied'); }, 2000); }); }
+  function copyLibId(btn) { const id = btn.previousElementSibling.innerText; navigator.clipboard.writeText(id).then(() => { const originalText = btn.innerHTML; btn.innerHTML = '<span class="material-icons" style="font-size:14px;">check</span> コピー'; btn.style.background = '#1e8e3e'; setTimeout(() => { btn.innerHTML = originalText; btn.style.background = '#0063AF'; }, 2000); }); }
+  function copyHtmlForUpdate() {
+      const html = document.documentElement.outerHTML;
+      const prompt = "【修正依頼】\n以下のHTMLマニュアルを、最新のGoogle Workspace/GASの仕様に合わせて全手順を見直し、アップデートしてください。\nデザインや構成は絶対に変更せず、テキストやスクリプトの中身だけを最新化してください。\n\n--- HTML Code ---\n" + html;
+      navigator.clipboard.writeText(prompt).then(() => { alert("管理者用：更新プロンプトをコピーしました！\n\nGeminiに貼り付けて、最新化を実行してください。"); });
+  }
+  function createConfetti() { const colors = ['#FFE000', '#009DD5', '#E76112', '#FFFFFF']; for (let i = 0; i < 150; i++) { const conf = document.createElement('div'); conf.classList.add('confetti'); conf.style.left = Math.random() * 100 + 'vw'; conf.style.top = -10 + 'px'; conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; conf.style.animationDuration = (Math.random() * 3 + 2) + 's'; document.body.appendChild(conf); } }
+  window.onload = init;
+</script>
+</body>
+</html>

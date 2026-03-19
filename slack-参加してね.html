@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slackに参加してね！</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    :root { --primary: #FFE000; --primary-text: #111111; --accent-blue: #0063AF; --bg: #f8f9fa; --surface: #ffffff; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Google Sans', Roboto, Arial, sans-serif; background: var(--bg); color: #202124; margin: 0; padding: 24px 16px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .card { background: var(--surface); max-width: 420px; width: 100%; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); overflow: hidden; border-top: 8px solid var(--primary); text-align: center; padding: 48px 32px; }
+    .icon { width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .icon .material-icons { font-size: 44px; color: var(--primary-text); }
+    h1 { margin: 0 0 16px; font-size: 26px; font-weight: 900; color: #111; letter-spacing: 0.02em; line-height: 1.3; }
+    .lead { margin: 0 0 32px; font-size: 15px; color: #5f6368; line-height: 1.6; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; max-width: 280px; padding: 16px 24px; font-size: 16px; font-weight: bold; text-decoration: none; border-radius: 12px; transition: transform 0.15s, box-shadow 0.15s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-primary { background: var(--accent-blue); color: #fff; box-shadow: 0 4px 14px rgba(0,99,175,0.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,99,175,0.4); }
+    .btn-secondary { background: var(--primary); color: var(--primary-text); margin-top: 12px; }
+    .btn-secondary:hover { transform: translateY(-2px); }
+    .btn .material-icons { font-size: 22px; }
+    .workspace { margin-top: 24px; padding-top: 24px; border-top: 1px dashed #dadce0; font-size: 13px; color: #5f6368; }
+    .workspace strong { color: #111; }
+</style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon"><span class="material-icons">campaign</span></div>
+        <h1>Slackに参加してね！</h1>
+        <p class="lead">Bremen Inc. のチームは Slack でやり取りしています。スマホからでも参加できるので、ぜひ入ってきてください。</p>
+        <a href="https://bremenband.slack.com" class="btn btn-primary" target="_blank" rel="noopener">
+            <span class="material-icons">open_in_new</span>
+            Slack を開く
+        </a>
+        <a href="slack-参加手順.html" class="btn btn-secondary">
+            <span class="material-icons">menu_book</span>
+            参加手順を見る
+        </a>
+        <p class="workspace"><strong>ワークスペース:</strong> Bremen Inc.<br>招待メールが届いていれば、そのリンクから参加できます。</p>
+    </div>
+</body>
+</html>
