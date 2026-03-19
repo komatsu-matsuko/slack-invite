@@ -10,13 +10,11 @@
 
 ```bash
 cd "/Users/komatsu/招待"
-git init
-git add index.html slack-参加手順.html .nojekyll
-git commit -m "Slack参加案内ページ"
 git branch -M main
 git remote add origin https://github.com/【あなたのユーザー名】/slack-invite.git
 git push -u origin main
 ```
+（すでに git init と commit 済みです）
 
 3. GitHub のリポジトリ → **Settings** → **Pages** → **Source**: "Deploy from a branch" → **Branch**: `main`、**Folder**: `/ (root)` → **Save**。
 4. 1〜2分後、次の URL で公開されます:  
