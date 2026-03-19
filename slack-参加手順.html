@@ -9,6 +9,7 @@
 { "@context": "http://schema.org", "@type": "HowTo", "name": "入社準備ガイド", "tool": ["Slack","Lolipop"], "estimatedTime": "20M" }
 </script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
     :root {
         --primary: #FFE000;
@@ -286,7 +287,7 @@
     </header>
 
     <!-- 支給品 -->
-    <div class="key-box">
+    <div class="key-box" id="key-box-capture">
         <div class="key-title"><span class="material-icons">vpn_key</span>支給された情報</div>
         <p class="key-hint"><span class="material-icons">content_copy</span>値の横の「コピー」ボタンをタップするとコピーできます</p>
         <p class="key-warning">※このページは本人のみ。転送・公開は絶対にしないでください（パスワードが含まれています）。</p>
@@ -347,6 +348,9 @@
                 </button>
             </div>
         </div>
+        <button onclick="saveKeyBoxAsImage(this)" style="margin-top:14px; width:100%; background:var(--frame-color); color:#fff; border:none; border-radius:10px; padding:12px 16px; font-size:14px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; -webkit-tap-highlight-color:transparent;">
+            <span class="material-icons" style="font-size:18px; color:#fff;">save_alt</span>このエリアを画像として保存する
+        </button>
     </div>
 
     <!-- =========================================
@@ -378,47 +382,6 @@
         <div class="task-item" data-task="1" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>ロリポップWebメールにログインして、受信トレイを確認した</span>
-        </div>
-
-        <p style="font-weight:bold; margin:20px 0 6px;">🔐 メールパスワードを自分のものに変更する</p>
-        <p style="font-size:14px; color:#5f6368; margin:0 0 10px;">支給されたパスワードは初期値です。ログイン後すぐに自分だけが知るパスワードに変更してください。</p>
-        <div class="info-box" style="flex-direction:column; gap:8px;">
-            <strong>⚙️ パスワード変更の手順</strong>
-            <ol style="margin:6px 0 0; padding-left:20px; font-size:14px; line-height:2;">
-                <li>ロリポップ Webメールにログインした状態で、画面右上の <strong>歯車アイコン（⚙）</strong> をタップ</li>
-                <li>「パスワードの変更」を選択</li>
-                <li>「現在のパスワード」欄に初期パスワード <strong id="step1-current-mailpw" style="font-family:monospace; color:var(--red);"></strong> を入力</li>
-                <li>「新しいパスワード」欄に自分で決めたパスワードを入力して保存</li>
-            </ol>
-            <a href="https://webmail.lolipop.jp/login/" target="_blank" rel="noopener">
-                <span class="material-icons" style="font-size:16px;">open_in_new</span>
-                ロリポップ！Webメールを開く
-            </a>
-        </div>
-
-        <p style="font-weight:bold; margin:18px 0 4px; font-size:14px;">📋 新しいパスワードを入力してコピー</p>
-        <p style="font-size:13px; color:#5f6368; margin:0 0 8px;">ここで決めたパスワードは Step 7 の廣瀬さんへの報告文に自動で反映されます。</p>
-        <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-            <input id="input-new-mailpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
-                style="flex:1; border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
-                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
-            <button class="copy-btn" onclick="copyInputVal('input-new-mailpw',this)" aria-label="入力したパスワードをコピー">
-                <span class="material-icons">content_copy</span>コピー
-            </button>
-        </div>
-        <p style="font-size:12px; color:#5f6368; margin:0 0 16px; padding:8px 12px; background:#f8f9fa; border-radius:8px; line-height:1.8;">
-            <strong>🔑 ロリポップのパスワード条件</strong><br>
-            半角英数字・記号を組み合わせた 8〜32 文字<br>
-            使える記号：! @ # $ % ^ &amp; * _ - + = など<br>
-            例）Tsub@2026! のように英大文字・数字・記号を混ぜると安全
-        </p>
-
-        <div class="caution-box">
-            ⚠️ 変更後のパスワードは<strong>廣瀬さんに Slack で報告</strong>してください（Step 7 で自動的に報告文が完成します）。
-        </div>
-        <div class="task-item" data-task="1b" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>ロリポップのメールパスワードを自分のものに変更した</span>
         </div>
     </div>
 
@@ -508,34 +471,14 @@
             <div class="step-badge">5</div>
             <h2>Slack のパスワードを設定してログインする</h2>
         </div>
-        <p>招待メールから参加フローに進むと、Slack のパスワード設定画面が表示されます。自分で決めた好きなパスワードを入力してください。<br>次回からは <strong>k.tsubaki@bremen.band ＋ 設定したパスワード</strong> でログインできます。</p>
+        <p>招待メールから参加フローに進むと、Slack のパスワード設定画面が表示されます。支給品の初期パスワードを入力してログインしてください。<br>次回からは <strong>k.tsubaki@bremen.band ＋ 初期パスワード</strong> でログインできます。</p>
         <div class="ui-mockup">
             <div class="ui-header">Slack — パスワードを設定</div>
             <div class="ui-body">
                 <p style="margin:0 0 4px; font-size:13px; color:#5f6368;">初期パスワード（支給品）</p>
-                <p style="margin:0 0 10px; padding:8px 12px; background:#fff3cd; border:1px solid #f9a825; border-radius:6px; font-family:monospace; font-weight:bold;" id="step5-current-slackpw"></p>
-                <p style="margin:0 0 4px; font-size:13px; color:#5f6368;">新しいパスワード（自分で決める）</p>
-                <p style="margin:0; padding:8px; border:1px solid #ccc; border-radius:4px; font-family:monospace; color:#aaa;">••••••••  ← ここに入力</p>
+                <p style="margin:0 0 2px; padding:8px 12px; background:#fff3cd; border:1px solid #f9a825; border-radius:6px; font-family:monospace; font-weight:bold;" id="step5-current-slackpw"></p>
             </div>
         </div>
-
-        <p style="font-weight:bold; margin:18px 0 4px; font-size:14px;">📋 新しいパスワードを入力してコピー</p>
-        <p style="font-size:13px; color:#5f6368; margin:0 0 8px;">ここで決めたパスワードは Step 7 の廣瀬さんへの報告文に自動で反映されます。</p>
-        <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-            <input id="input-new-slackpw" type="text" placeholder="新しいパスワードを入力..." oninput="updatePwReport()"
-                style="flex:1; border:2px solid var(--border); border-radius:8px; padding:10px 14px; font-size:15px; font-family:monospace; outline:none; transition:border-color .2s;"
-                onfocus="this.style.borderColor='var(--accent-blue)'" onblur="this.style.borderColor='var(--border)'">
-            <button class="copy-btn" onclick="copyInputVal('input-new-slackpw',this)" aria-label="入力したパスワードをコピー">
-                <span class="material-icons">content_copy</span>コピー
-            </button>
-        </div>
-        <p style="font-size:12px; color:#5f6368; margin:0 0 16px; padding:8px 12px; background:#f8f9fa; border-radius:8px; line-height:1.8;">
-            <strong>🔑 Slack のパスワード条件</strong><br>
-            半角英数字・記号を含む <strong>8 文字以上</strong><br>
-            英大文字・英小文字・数字をそれぞれ 1 文字以上含むこと<br>
-            例）Brm@2026!s のように英大文字・数字・記号を混ぜると安全
-        </p>
-
         <div class="task-item" data-task="5" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>Slack にログインできて、Bremen Inc. が表示された</span>
@@ -569,40 +512,14 @@
         </div>
     </div>
 
-    <!-- Step 7: 廣瀬さんへパスワード報告 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">7</div>
-            <h2>廣瀬さんへ変更後のパスワードを報告する</h2>
-        </div>
-        <p>Step 1・5 で入力したパスワードが下の報告文に自動で反映されます。コピーして廣瀬さんの DM に貼り付けてください。</p>
-
-        <div class="info-box" style="flex-direction:column; gap:0;">
-            <strong>💬 報告メッセージ（Step 1・5 の入力内容が自動で反映）</strong>
-            <p id="val-pw-report" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;"></p>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                <button class="copy-btn" onclick="copyVal('val-pw-report',this)" aria-label="報告文をコピー">
-                    <span class="material-icons">content_copy</span>報告文をコピー
-                </button>
-                <a href="slack://user?id=U01KD66B1EW" class="copy-btn" style="text-decoration:none; background:#4a154b;" aria-label="廣瀬さんのDMを開く">
-                    <span class="material-icons" style="font-size:16px;">chat</span>廣瀬さんのDMを開く
-                </a>
-            </div>
-        </div>
-        <div class="task-item" data-task="7b" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>廣瀬さんへ変更後のパスワードを Slack で報告した</span>
-        </div>
-    </div>
-
     <!-- =========================================
          PART 3: 入社書類の準備
     ========================================= -->
 
-    <!-- Step 8 -->
+    <!-- Step 7 -->
     <div class="section">
         <div class="section-head">
-            <div class="step-badge">8</div>
+            <div class="step-badge">7</div>
             <h2>入社書類・口座を準備する</h2>
         </div>
         <p>以下を濱村さんのDMに送信してください。</p>
@@ -654,6 +571,29 @@
     </div>
 
 </div><!-- /container -->
+
+<!-- 非公開確認モーダル -->
+<div id="unpublishModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9998; align-items:center; justify-content:center; padding:24px;">
+    <div style="background:#fff; border-radius:20px; padding:32px 24px; max-width:420px; width:100%; box-shadow:0 8px 40px rgba(0,0,0,0.25); text-align:center;">
+        <p style="font-size:32px; margin:0 0 8px;">🔒</p>
+        <p style="font-size:18px; font-weight:900; color:#111; margin:0 0 10px;">全ステップ完了おめでとうございます！</p>
+        <p style="font-size:14px; color:#5f6368; margin:0 0 20px; line-height:1.7;">このページを非公開にしますか？<br>非公開にすると URL にアクセスできなくなります。<br>復帰は管理者のみが対応できます。</p>
+        <div id="unpublishCmd" style="display:none; text-align:left; margin-bottom:20px;">
+            <p style="font-size:12px; color:#5f6368; margin:0 0 6px;">管理者用コマンド（ターミナルで実行）</p>
+            <div style="background:#1e1e1e; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:12px; color:#d4d4d4; word-break:break-all; position:relative;">
+                <span id="unpublishCmdText">gh api repos/komatsu-matsuko/slack-invite --method PATCH --field private=true</span>
+                <button onclick="copyUnpublishCmd()" style="position:absolute; top:8px; right:8px; background:#444; border:none; border-radius:6px; color:#fff; font-size:11px; padding:4px 10px; cursor:pointer; display:flex; align-items:center; gap:4px;">
+                    <span class="material-icons" style="font-size:13px; color:#fff;">content_copy</span>コピー
+                </button>
+            </div>
+            <p style="font-size:12px; color:#d93025; margin:8px 0 0;">⚠️ 実行後すぐにページは 404 になります。復旧は管理者のみ対応可能です。</p>
+        </div>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button onclick="closeUnpublishModal()" style="background:#f8f9fa; border:2px solid #ddd; border-radius:10px; padding:12px 24px; font-size:15px; font-weight:bold; cursor:pointer; color:#5f6368;">いいえ、戻る</button>
+            <button id="unpublishYesBtn" onclick="showUnpublishCmd()" style="background:var(--red); border:none; border-radius:10px; padding:12px 24px; font-size:15px; font-weight:bold; cursor:pointer; color:#fff;">はい、非公開にする</button>
+        </div>
+    </div>
+</div>
 
 <!-- 進捗バー -->
 <div class="progress-container">
@@ -856,6 +796,33 @@ function celebrate() {
         c.style.animationDuration = (Math.random() * 3 + 2) + 's';
         document.body.appendChild(c);
     }
+    // 紙吹雪から1.5秒後に非公開確認モーダルを表示
+    setTimeout(openUnpublishModal, 1500);
+}
+
+/* ==============================
+   非公開ポップアップ
+============================== */
+function openUnpublishModal() {
+    var m = document.getElementById('unpublishModal');
+    if (m) { m.style.display = 'flex'; }
+}
+
+function closeUnpublishModal() {
+    var m = document.getElementById('unpublishModal');
+    if (m) { m.style.display = 'none'; }
+}
+
+function showUnpublishCmd() {
+    document.getElementById('unpublishCmd').style.display = 'block';
+    document.getElementById('unpublishYesBtn').style.display = 'none';
+}
+
+function copyUnpublishCmd() {
+    var text = document.getElementById('unpublishCmdText').textContent.trim();
+    navigator.clipboard.writeText(text).then(function() {
+        showToast('コマンドをコピーしました');
+    });
 }
 
 /* ==============================
@@ -869,6 +836,30 @@ function updatePwReport() {
     var msg = '廣瀬さん、こんにちは。椿です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
     var el = document.getElementById('val-pw-report');
     if (el) el.textContent = msg;
+}
+
+/* ==============================
+   支給品エリアを画像として保存
+============================== */
+function saveKeyBoxAsImage(btn) {
+    var el = document.getElementById('key-box-capture');
+    if (!el || typeof html2canvas === 'undefined') { showToast('保存に失敗しました'); return; }
+    var origBtn = btn.innerHTML;
+    btn.innerHTML = '<span class="material-icons" style="font-size:18px;color:#fff;">hourglass_top</span>生成中...';
+    btn.disabled = true;
+    html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(function(canvas) {
+        var link = document.createElement('a');
+        link.download = '支給された情報.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('画像を保存しました');
+        btn.innerHTML = origBtn;
+        btn.disabled = false;
+    }).catch(function() {
+        showToast('保存に失敗しました');
+        btn.innerHTML = origBtn;
+        btn.disabled = false;
+    });
 }
 
 /* ==============================
