@@ -301,7 +301,7 @@
                 <span class="material-icons">email</span>
                 <div class="key-item-body">
                     <div class="key-label">メールアドレス</div>
-                    <div class="key-val" id="val-email">y.itoi@bremen.band</div>
+                    <div class="key-val" id="val-email"></div>
                 </div>
                 <button class="copy-btn" onclick="copyVal('val-email',this)" aria-label="メールアドレスをコピー">
                     <span class="material-icons">content_copy</span>コピー
@@ -375,7 +375,7 @@
         <div class="ui-mockup">
             <div class="ui-header">📱 Webメーラー ログイン画面</div>
             <div class="ui-body">
-                <p style="margin:0 0 6px;">メールアドレス欄 → <strong style="color:var(--red);">コピーした y.itoi@bremen.band を貼り付け 👈</strong></p>
+                <p style="margin:0 0 6px;">メールアドレス欄 → <strong style="color:var(--red);">コピーしたメールアドレスを貼り付け 👈</strong></p>
                 <p style="margin:0;">パスワード欄 → <strong style="color:var(--red);">コピーしたパスワードを貼り付け 👈</strong></p>
             </div>
         </div>
@@ -395,7 +395,7 @@
         <div class="mail-setup-box">
             <strong>📧 メールアプリ設定値</strong>
             <ul>
-                <li><strong>メールアドレス:</strong> y.itoi@bremen.band</li>
+                <li><strong>メールアドレス:</strong> 支給品のメールアドレス</li>
                 <li><strong>パスワード:</strong> 上記支給品のロリポップメールパスワード</li>
                 <li><strong>受信サーバー:</strong> imap.lolipop.jp（IMAP）ポート 993・SSL</li>
                 <li><strong>送信サーバー:</strong> smtp.lolipop.jp（SMTP）ポート 465・SSL</li>
@@ -471,7 +471,7 @@
             <div class="step-badge">5</div>
             <h2>Slack のパスワードを設定してログインする</h2>
         </div>
-        <p>招待メールから参加フローに進むと、Slack のパスワード設定画面が表示されます。支給品の初期パスワードを入力してログインしてください。<br>次回からは <strong>y.itoi@bremen.band ＋ 初期パスワード</strong> でログインできます。</p>
+        <p>招待メールから参加フローに進むと、Slack のパスワード設定画面が表示されます。支給品の初期パスワードを入力してログインしてください。<br>次回からは <strong>メールアドレス ＋ 初期パスワード</strong> でログインできます。</p>
         <div class="ui-mockup">
             <div class="ui-header">Slack — パスワードを設定</div>
             <div class="ui-body">
@@ -495,7 +495,7 @@
         <div class="info-box" style="flex-direction:column; gap:0;">
             <strong>💬 参考メッセージ（コピーして使ってください）</strong>
             <p id="val-greet" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;">濱村さん、こんにちは！
-このたびお世話になります、糸井（y.itoi@bremen.band）です。
+このたびお世話になります、（名前）です。
 本日より Slack に参加しました。どうぞよろしくお願いいたします。</p>
             <div style="display:flex; flex-wrap:wrap; gap:8px;">
                 <button class="copy-btn" onclick="copyVal('val-greet',this)" aria-label="挨拶文をコピー">
@@ -525,7 +525,7 @@
         <p>以下を濱村さんのDMに送信してください。</p>
 
         <p style="font-weight:bold; margin-bottom:8px;">社会保険・厚生年金関連</p>
-        <span class="deadline">4月30日 締め切り</span>
+        <span class="deadline">〇月〇〇日 締め切り</span>
         <div class="task-item" data-task="7" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>① マイナンバー入りの住民票</span>
@@ -544,7 +544,7 @@
         </div>
 
         <p style="font-weight:bold; margin:20px 0 8px;">事業関連</p>
-        <span class="deadline">4月30日 締め切り</span>
+        <span class="deadline">〇月〇〇日 締め切り</span>
         <div class="task-item" data-task="11" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>⑤ 給与用銀行口座</span>
@@ -619,8 +619,8 @@ const STORAGE_KEY = 'bremen_tasks_v1';
 const PW_EXPIRY_KEY  = 'bremen_pw_opened_at_v1';
 const PW_EXPIRY_MS   = 24 * 60 * 60 * 1000; // 24時間
 // パスワード（分割して難読化）
-const _MP = ['5g66','lmE8','lB_R','siQ'].join('');   // ロリポップ メールパスワード
-const _SP = ['pMph','s2uu','h0ao','Rg'].join(''); // Slack 初期パスワード
+const _MP = '';   // ロリポップ メールパスワード
+const _SP = ''; // Slack 初期パスワード
 
 /* ==============================
    初期化
@@ -833,7 +833,7 @@ function updatePwReport() {
     var slackPw = document.getElementById('input-new-slackpw') ? document.getElementById('input-new-slackpw').value.trim() : '';
     var mailLine  = mailPw  ? mailPw  : '（未入力）';
     var slackLine = slackPw ? slackPw : '（未入力）';
-    var msg = '廣瀬さん、こんにちは。糸井です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
+    var msg = '廣瀬さん、こんにちは。（名前）です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
     var el = document.getElementById('val-pw-report');
     if (el) el.textContent = msg;
 }
