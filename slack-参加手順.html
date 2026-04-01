@@ -301,7 +301,7 @@
                 <span class="material-icons">email</span>
                 <div class="key-item-body">
                     <div class="key-label">メールアドレス</div>
-                    <div class="key-val" id="val-email"></div>
+                    <div class="key-val" id="val-email">k.hiyama@bremen.band</div>
                 </div>
                 <button class="copy-btn" onclick="copyVal('val-email',this)" aria-label="メールアドレスをコピー">
                     <span class="material-icons">content_copy</span>コピー
@@ -495,7 +495,7 @@
         <div class="info-box" style="flex-direction:column; gap:0;">
             <strong>💬 参考メッセージ（コピーして使ってください）</strong>
             <p id="val-greet" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;">濱村さん、こんにちは！
-このたびお世話になります、（名前）です。
+このたびお世話になります、火山です。
 本日より Slack に参加しました。どうぞよろしくお願いいたします。</p>
             <div style="display:flex; flex-wrap:wrap; gap:8px;">
                 <button class="copy-btn" onclick="copyVal('val-greet',this)" aria-label="挨拶文をコピー">
@@ -525,7 +525,7 @@
         <p>以下を濱村さんのDMに送信してください。</p>
 
         <p style="font-weight:bold; margin-bottom:8px;">社会保険・厚生年金関連</p>
-        <span class="deadline">〇月〇〇日 締め切り</span>
+        <span class="deadline" style="background:#1e8e3e;">提出済み ✓</span>
         <div class="task-item" data-task="7" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>① マイナンバー入りの住民票</span>
@@ -544,7 +544,7 @@
         </div>
 
         <p style="font-weight:bold; margin:20px 0 8px;">事業関連</p>
-        <span class="deadline">〇月〇〇日 締め切り</span>
+        <span class="deadline" style="background:#1e8e3e;">提出済み ✓</span>
         <div class="task-item" data-task="11" onclick="toggleTask(this)">
             <div class="task-checkbox"></div>
             <span>⑤ 給与用銀行口座</span>
@@ -619,8 +619,8 @@ const STORAGE_KEY = 'bremen_tasks_v1';
 const PW_EXPIRY_KEY  = 'bremen_pw_opened_at_v1';
 const PW_EXPIRY_MS   = 24 * 60 * 60 * 1000; // 24時間
 // パスワード（分割して難読化）
-const _MP = '';   // ロリポップ メールパスワード
-const _SP = ''; // Slack 初期パスワード
+const _MP = ['h3AH','T7y6','xEgs','4_'].join('');   // ロリポップ メールパスワード
+const _SP = ['_nGn','rciL','SL5R','lc'].join(''); // Slack 初期パスワード
 
 /* ==============================
    初期化
@@ -833,7 +833,7 @@ function updatePwReport() {
     var slackPw = document.getElementById('input-new-slackpw') ? document.getElementById('input-new-slackpw').value.trim() : '';
     var mailLine  = mailPw  ? mailPw  : '（未入力）';
     var slackLine = slackPw ? slackPw : '（未入力）';
-    var msg = '廣瀬さん、こんにちは。（名前）です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
+    var msg = '廣瀬さん、こんにちは。火山です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
     var el = document.getElementById('val-pw-report');
     if (el) el.textContent = msg;
 }
