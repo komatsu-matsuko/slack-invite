@@ -5,592 +5,691 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>入社準備ガイド — Bremen Inc.</title>
-<script type="application/ld+json" id="ai-metadata">
-{ "@context": "http://schema.org", "@type": "HowTo", "name": "入社準備ガイド", "tool": ["Slack","Lolipop"], "estimatedTime": "20M" }
-</script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function(){
+    var EXPIRY = new Date('2026-04-02T23:59:59+09:00').getTime();
+    if(Date.now() > EXPIRY){
+        document.addEventListener('DOMContentLoaded',function(){
+            document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;background:#f8f9fa;padding:24px"><div style="text-align:center;background:#fff;border-radius:20px;padding:48px 32px;box-shadow:0 4px 20px rgba(0,0,0,.08);max-width:480px"><p style="font-size:48px;margin:0 0 16px">🔒</p><h1 style="font-size:22px;color:#202124;margin:0 0 12px">このページは公開期間を過ぎました</h1><p style="font-size:15px;color:#5f6368;line-height:1.7;margin:0">セキュリティのためリンクは無効化されています。<br>必要な場合は Slack で管理者にお問い合わせください。</p></div></div>';
+        });
+    }
+})();
+</script>
 <style>
-    :root {
-        --primary: #FFE000;
-        --primary-text: #111111;
-        --accent-blue: #0063AF;
-        --frame-color: #00508C;
-        --success: #1e8e3e;
-        --bg: #f8f9fa;
-        --completed-bg: #C6E7FA;
-        --surface: #ffffff;
-        --border: #dadce0;
-        --red: #d93025;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-        font-family: 'Google Sans', Roboto, Arial, sans-serif;
-        background-color: var(--bg);
-        color: #202124;
-        line-height: 1.6;
-        margin: 0;
-        padding: 24px 16px 140px;
-        transition: background-color 1.5s ease;
-        font-size: 16px;
-    }
-    body.completed { background-color: var(--completed-bg) !important; }
-    .container { max-width: 680px; margin: 0 auto; }
+:root {
+    --primary: #FFE000;
+    --primary-text: #111;
+    --accent: #0063AF;
+    --frame: #00508C;
+    --ok: #1e8e3e;
+    --bg: #f8f9fa;
+    --done-bg: #C6E7FA;
+    --border: #dadce0;
+    --red: #d93025;
+    --purple: #7b1fa2;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{font-family:'Google Sans',Roboto,Arial,sans-serif;background:var(--bg);color:#202124;line-height:1.6;margin:0;padding:24px 16px 140px;font-size:16px;transition:background 1.5s}
+body.completed{background:var(--done-bg)!important}
+.container{max-width:680px;margin:0 auto}
 
-    /* ===== HEADER ===== */
-    header {
-        text-align: center;
-        background: white;
-        padding: 32px 24px 28px;
-        border-radius: 20px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        margin-bottom: 32px;
-        border-top: 8px solid var(--primary);
-    }
-    .mission-label {
-        background: var(--primary);
-        color: var(--primary-text);
-        display: inline-block;
-        padding: 4px 14px;
-        border-radius: 99px;
-        font-weight: 900;
-        letter-spacing: .1em;
-        margin-bottom: 12px;
-        font-size: 13px;
-    }
-    header h1 { margin: 0; font-size: 24px; font-weight: 900; color: #111; line-height: 1.3; }
-    header .sub { font-size: 14px; color: #5f6368; margin-top: 8px; }
+/* --- header --- */
+header{text-align:center;background:#fff;padding:32px 24px 28px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,.08);margin-bottom:32px;border-top:8px solid var(--primary)}
+.mission-label{background:var(--primary);color:var(--primary-text);display:inline-block;padding:4px 14px;border-radius:99px;font-weight:900;letter-spacing:.1em;margin-bottom:12px;font-size:13px}
+header h1{margin:0;font-size:24px;font-weight:900;color:#111;line-height:1.3}
+header .sub{font-size:14px;color:#5f6368;margin-top:8px}
 
-    /* ===== PROGRESS BAR (fixed bottom) ===== */
-    .progress-container {
-        position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-        width: calc(100% - 32px); max-width: 640px;
-        z-index: 1000; pointer-events: none;
-    }
-    .progress-frame {
-        width: 100%; height: 22px;
-        background: var(--frame-color);
-        border-radius: 999px; border: 3px solid #fff;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25); position: relative;
-    }
-    .progress-bar {
-        width: 0%; height: 100%;
-        background: var(--primary); border-radius: 999px;
-        transition: width .5s cubic-bezier(0.34,1.56,0.64,1); position: relative;
-    }
-    .progress-char {
-        position: absolute; right: -24px; top: -36px;
-        width: 46px; height: 46px;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
-        transition: right .5s ease;
-    }
-    .progress-char img { width: 100%; height: 100%; object-fit: contain; }
-    .progress-label {
-        position: absolute; right: 0; top: -24px;
-        font-size: 11px; font-weight: 900; color: var(--frame-color);
-        pointer-events: none;
-    }
+/* --- progress bar --- */
+.progress-container{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:640px;z-index:1000;pointer-events:none}
+.progress-frame{width:100%;height:22px;background:var(--frame);border-radius:999px;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.25);position:relative}
+.progress-bar{width:0%;height:100%;background:var(--primary);border-radius:999px;transition:width .5s cubic-bezier(.34,1.56,.64,1);position:relative}
+.progress-char{position:absolute;right:-24px;top:-36px;width:46px;height:46px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
+.progress-char img{width:100%;height:100%;object-fit:contain}
 
-    /* ===== KEY BOX ===== */
-    .key-box {
-        background: #fff; border: 2px solid var(--primary);
-        border-radius: 16px; padding: 20px 20px 16px;
-        margin-bottom: 24px;
-        box-shadow: 0 4px 0 rgba(0,0,0,.05);
-    }
-    .key-title {
-        font-weight: 900; font-size: 17px; color: #111;
-        display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
-    }
-    .key-hint { font-size: 12px; color: var(--accent-blue); margin-bottom: 14px; display: flex; align-items: center; gap: 4px; }
-    .key-hint .material-icons { font-size: 14px; }
-    .key-warning { font-size: 12px; color: #5f6368; margin-bottom: 14px; }
-    .key-list { display: flex; flex-direction: column; gap: 10px; }
-    .key-item {
-        background: #f8f9fa; border: 1px solid #ddd;
-        border-radius: 10px; padding: 12px 14px;
-        display: flex; align-items: center; gap: 10px;
-    }
-    .key-item .material-icons { color: var(--frame-color); font-size: 20px; flex-shrink: 0; }
-    .key-item-body { flex: 1; min-width: 0; }
-    .key-label { font-size: 11px; color: #5f6368; margin-bottom: 2px; }
-    .key-val {
-        font-family: monospace; font-weight: bold; font-size: 15px;
-        color: #111; word-break: break-all;
-    }
-    .copy-btn {
-        flex-shrink: 0;
-        background: var(--accent-blue); color: #fff;
-        border: none; border-radius: 8px;
-        padding: 8px 14px; font-size: 13px; font-weight: bold;
-        cursor: pointer; display: flex; align-items: center; gap: 4px;
-        transition: background .15s, transform .1s;
-        -webkit-tap-highlight-color: transparent;
-        min-height: 44px;
-    }
-    .copy-btn:active { transform: scale(.96); }
-    .copy-btn.ok { background: var(--success); }
-    .copy-btn .material-icons { font-size: 16px; color: #fff; }
+/* --- section card --- */
+.section{background:#fff;border-radius:16px;padding:22px 20px 18px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.section-head{display:flex;align-items:center;gap:10px;border-bottom:2px solid #f0f0f0;padding-bottom:12px;margin-bottom:16px}
+.step-badge{background:var(--primary);color:var(--primary-text);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.section-head h2{margin:0;font-size:17px;font-weight:900;color:#202124;line-height:1.3}
+.section p{margin:0 0 14px;font-size:15px}
+.section p:last-child{margin-bottom:0}
 
-    /* ===== SECTION (step card) ===== */
-    .section {
-        background: #fff; border-radius: 16px;
-        padding: 22px 20px 18px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.07);
-    }
-    .section-head {
-        display: flex; align-items: center; gap: 10px;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 12px; margin-bottom: 16px;
-    }
-    .step-badge {
-        background: var(--primary); color: var(--primary-text);
-        width: 30px; height: 30px; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-weight: 900; font-size: 15px; flex-shrink: 0;
-        box-shadow: 0 2px 4px rgba(0,0,0,.1);
-    }
-    .section-head h2 {
-        margin: 0; font-size: 17px; font-weight: 900; color: #202124; line-height: 1.3;
-    }
-    .section p { margin: 0 0 14px; font-size: 15px; }
-    .section p:last-child { margin-bottom: 0; }
+/* --- part divider --- */
+.part-divider{text-align:center;padding:28px 20px 12px;margin:32px 0 20px;border-top:3px solid var(--primary)}
+.part-divider .part-label{display:inline-block;background:var(--primary);color:var(--primary-text);padding:4px 16px;border-radius:99px;font-weight:900;font-size:12px;letter-spacing:.08em;margin-bottom:8px}
+.part-divider h2{margin:0;font-size:20px;font-weight:900;color:#111}
+.part-divider p{margin:6px 0 0;font-size:13px;color:#5f6368}
 
-    /* ===== TASK ITEM (single check per step) ===== */
-    .task-item {
-        display: flex; align-items: center; gap: 14px;
-        padding: 14px 16px;
-        border: 2px solid var(--border);
-        border-radius: 12px; margin-top: 14px;
-        cursor: pointer;
-        background: #fff;
-        transition: background .2s, border-color .2s;
-        -webkit-tap-highlight-color: transparent;
-        user-select: none;
-    }
-    .task-item:hover { background: #f0f7ff; border-color: var(--accent-blue); }
-    .task-checkbox {
-        width: 26px; height: 26px; flex-shrink: 0;
-        border: 2.5px solid var(--success); border-radius: 7px;
-        background: #fff; display: flex; align-items: center; justify-content: center;
-        font-size: 16px; font-weight: bold; color: transparent;
-        transition: all .2s;
-    }
-    .task-item.checked { background: #e6f4ea; border-color: var(--success); }
-    .task-item.checked .task-checkbox {
-        background: var(--success); color: #fff; border-color: var(--success);
-    }
-    .task-item.checked .task-checkbox::after { content: "✔"; }
-    .task-item span { font-size: 15px; font-weight: 500; line-height: 1.4; flex: 1; }
+/* ============================
+   🟢 ACTION CARD — やること
+   ============================ */
+.action{background:#edf7ee;border-left:5px solid var(--ok);border-radius:12px;padding:16px 18px;margin:14px 0;font-size:14px;line-height:1.7}
+.action .action-label{display:flex;align-items:center;gap:6px;font-weight:900;font-size:13px;color:var(--ok);margin-bottom:8px}
+.action .action-label .material-icons{font-size:18px}
+.action a.action-btn{display:inline-flex;align-items:center;gap:6px;background:var(--ok);color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:bold;font-size:14px;margin-top:8px}
+.action a.action-btn:active{transform:scale(.97)}
 
-    /* ===== INFO BOXES ===== */
-    .info-box {
-        background: #f0f7ff; border-left: 4px solid var(--accent-blue);
-        border-radius: 10px; padding: 14px 16px; margin: 14px 0; font-size: 14px;
-        display: flex; flex-direction: column;
-    }
-    .info-box strong { display: block; margin-bottom: 6px; }
-    .info-box a {
-        display: inline-flex; align-items: center; gap: 6px;
-        background: var(--accent-blue); color: #fff; text-decoration: none;
-        padding: 10px 16px; border-radius: 8px; font-weight: bold;
-        font-size: 14px; margin-top: 8px; align-self: flex-start;
-    }
-    .caution-box {
-        background: #fff8e1; border-left: 4px solid #f9a825;
-        border-radius: 10px; padding: 14px 16px; margin: 14px 0; font-size: 14px;
-    }
-    .mail-setup-box {
-        background: #f8f9fa; border-radius: 10px;
-        padding: 14px 16px; margin: 14px 0; font-size: 14px;
-    }
-    .mail-setup-box ul { margin: 8px 0 0; padding-left: 20px; line-height: 1.9; }
-    .mail-setup-box strong { display: block; margin-bottom: 4px; }
+/* ============================
+   📱 SCREEN GUIDE — 折りたたみ
+   ============================ */
+.screen-guide{border:2px dashed #90caf9;border-radius:12px;margin:14px 0;background:#fafcff}
+.screen-guide summary{padding:14px 16px;font-size:14px;font-weight:bold;color:var(--accent);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;-webkit-tap-highlight-color:transparent}
+.screen-guide summary::-webkit-details-marker{display:none}
+.screen-guide summary::before{content:'▶';font-size:11px;transition:transform .2s}
+.screen-guide[open] summary::before{transform:rotate(90deg)}
+.screen-guide .guide-body{padding:0 16px 16px}
+.screen-guide .mock{border:1px solid #ddd;border-radius:10px;overflow:hidden;margin:10px 0;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.screen-guide .mock-head{background:#f1f3f4;padding:8px 14px;border-bottom:1px solid #ddd;color:#5f6368;font-size:11px;font-weight:bold}
+.screen-guide .mock-body{padding:14px}
 
-    /* ===== UI MOCKUP ===== */
-    .ui-mockup {
-        border: 1px solid #ddd; border-radius: 10px;
-        overflow: hidden; margin: 14px 0; font-size: 13px;
-        box-shadow: 0 2px 6px rgba(0,0,0,.06);
-    }
-    .ui-header {
-        background: #f1f3f4; padding: 8px 14px;
-        border-bottom: 1px solid #ddd; color: #5f6368;
-        font-size: 11px; font-weight: bold;
-        display: flex; align-items: center; gap: 5px;
-    }
-    .ui-body { padding: 14px; }
+/* --- info / caution / tip --- */
+.info-box{background:#f0f7ff;border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;display:flex;flex-direction:column}
+.info-box strong{display:block;margin-bottom:6px}
+.info-box a{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;text-decoration:none;padding:10px 16px;border-radius:8px;font-weight:bold;font-size:14px;margin-top:8px;align-self:flex-start}
+.caution-box{background:#fff8e1;border-left:4px solid #f9a825;border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.7}
+.tip-box{background:#e8f5e9;border-left:4px solid var(--ok);border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.7}
 
-    /* ===== DEADLINE BADGE ===== */
-    .deadline {
-        display: inline-block; background: var(--red);
-        color: #fff; font-size: 12px; font-weight: bold;
-        padding: 2px 10px; border-radius: 99px; margin-bottom: 10px;
-    }
+/* --- key box --- */
+.key-box{background:#fff;border:2px solid var(--primary);border-radius:16px;padding:20px 20px 16px;margin-bottom:24px;box-shadow:0 4px 0 rgba(0,0,0,.05)}
+.key-title{font-weight:900;font-size:17px;color:#111;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.key-hint{font-size:12px;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:4px}
+.key-hint .material-icons{font-size:14px}
+.key-warning{font-size:12px;color:#5f6368;margin-bottom:14px}
+.key-list{display:flex;flex-direction:column;gap:10px}
+.key-item{background:#f8f9fa;border:1px solid #ddd;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.key-item .material-icons{color:var(--frame);font-size:20px;flex-shrink:0}
+.key-item-body{flex:1;min-width:0}
+.key-label{font-size:11px;color:#5f6368;margin-bottom:2px}
+.key-val{font-family:monospace;font-weight:bold;font-size:15px;color:#111;word-break:break-all}
 
-    /* ===== TOAST ===== */
-    .toast {
-        position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-        background: #202124; color: #fff;
-        padding: 12px 24px; border-radius: 24px; font-size: 14px;
-        z-index: 9999; opacity: 0; transition: opacity .3s; pointer-events: none;
-        white-space: nowrap;
-    }
-    .toast.show { opacity: 1; }
+/* --- buttons --- */
+.copy-btn{flex-shrink:0;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:bold;cursor:pointer;display:flex;align-items:center;gap:4px;transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent;min-height:44px}
+.copy-btn:active{transform:scale(.96)}
+.copy-btn.ok{background:var(--ok)}
+.copy-btn .material-icons{font-size:16px;color:#fff}
 
-    /* ===== CONFETTI ===== */
-    .confetti {
-        position: fixed; width: 10px; height: 10px;
-        background-color: #f00; animation: fall linear forwards;
-        z-index: 9999; pointer-events: none;
-    }
-    @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+/* --- task checkbox --- */
+.task-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border:2px solid var(--border);border-radius:12px;margin-top:14px;cursor:pointer;background:#fff;transition:background .2s,border-color .2s;-webkit-tap-highlight-color:transparent;user-select:none}
+.task-item:hover{background:#f0f7ff;border-color:var(--accent)}
+.task-checkbox{width:26px;height:26px;flex-shrink:0;border:2.5px solid var(--ok);border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:bold;color:transparent;transition:all .2s}
+.task-item.checked{background:#e6f4ea;border-color:var(--ok)}
+.task-item.checked .task-checkbox{background:var(--ok);color:#fff;border-color:var(--ok)}
+.task-item.checked .task-checkbox::after{content:"✔"}
+.task-item span{font-size:15px;font-weight:500;line-height:1.4;flex:1}
 
-    /* ===== FOOTER ===== */
-    .footer-actions { text-align: center; margin-top: 60px; padding-top: 24px; border-top: 1px dashed #ddd; }
-    .fix-btn {
-        background: #f8f9fa; border: 1px solid #ddd; color: #5f6368;
-        padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 12px;
-        display: inline-flex; align-items: center; gap: 6px; transition: all .2s;
-    }
-    .fix-btn:hover { background: #333; color: #fff; border-color: #333; }
+/* --- domain / why / mbti cards --- */
+.domain-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.domain-card{border-radius:12px;padding:14px;color:#fff;font-size:13px;line-height:1.5}
+.domain-card .dn{font-weight:900;font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.why-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+.why-item{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:12px;padding:16px;display:flex;gap:12px;align-items:flex-start}
+.why-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.why-item h3{margin:0 0 4px;font-size:15px;font-weight:900}
+.why-item p{margin:0;font-size:13px;color:#5f6368;line-height:1.5}
+.mbti-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.mbti-card{border-radius:12px;padding:14px;text-align:center;color:#fff}
+.mbti-card .md{font-weight:900;font-size:15px;margin-bottom:2px}
 
-    /* ===== TERM TOOLTIP ===== */
-    .term {
-        border-bottom: 2px dotted var(--accent-blue);
-        cursor: help; position: relative; color: var(--accent-blue); font-weight: bold;
-    }
-    .term:hover::after {
-        content: attr(data-tooltip);
-        position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
-        background: #202124; color: #fff; padding: 8px 12px; border-radius: 6px;
-        font-size: 12px; white-space: nowrap; z-index: 1000;
-        box-shadow: 0 4px 10px rgba(0,0,0,.2); line-height: 1.4; font-weight: normal;
-    }
-    .term:hover::before {
-        content: ""; position: absolute; bottom: 100%; left: 50%; margin-left: -5px;
-        border-width: 5px; border-style: solid;
-        border-color: #202124 transparent transparent transparent; z-index: 1000;
-    }
+/* --- intro card --- */
+.intro-card{background:#fff;border:2px solid var(--primary);border-radius:16px;padding:24px 20px;margin-bottom:24px;box-shadow:0 4px 0 rgba(0,0,0,.05)}
+.intro-card h2{margin:0 0 14px;font-size:20px;font-weight:900;display:flex;align-items:center;gap:8px}
+
+/* --- result textarea --- */
+.result-area{background:#f8f9fa;border:2px dashed #dadce0;border-radius:12px;padding:16px;margin:14px 0}
+.result-area textarea{width:100%;min-height:80px;border:1px solid #ddd;border-radius:8px;padding:12px;font-size:14px;font-family:inherit;resize:vertical;line-height:1.6}
+.result-area textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+
+/* --- term tooltip --- */
+.term{border-bottom:2px dotted var(--accent);cursor:help;position:relative;color:var(--accent);font-weight:bold}
+.term:hover::after{content:attr(data-tooltip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:#202124;color:#fff;padding:8px 12px;border-radius:6px;font-size:12px;z-index:1000;box-shadow:0 4px 10px rgba(0,0,0,.2);line-height:1.4;font-weight:normal;max-width:260px;white-space:normal}
+.term:hover::before{content:"";position:absolute;bottom:100%;left:50%;margin-left:-5px;border-width:5px;border-style:solid;border-color:#202124 transparent transparent transparent;z-index:1000}
+
+/* --- deadline badge --- */
+.deadline{display:inline-block;background:var(--ok);color:#fff;font-size:12px;font-weight:bold;padding:2px 10px;border-radius:99px;margin-bottom:10px}
+
+/* --- misc --- */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#202124;color:#fff;padding:12px 24px;border-radius:24px;font-size:14px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+.confetti{position:fixed;width:10px;height:10px;animation:fall linear forwards;z-index:9999;pointer-events:none}
+@keyframes fall{to{transform:translateY(100vh) rotate(720deg)}}
+.footer-actions{text-align:center;margin-top:60px;padding-top:24px;border-top:1px dashed #ddd}
+.fix-btn{background:#f8f9fa;border:1px solid #ddd;color:#5f6368;padding:8px 16px;border-radius:20px;cursor:pointer;font-size:12px;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.fix-btn:hover{background:#333;color:#fff;border-color:#333}
+.mail-setup-box{background:#f8f9fa;border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px}
+.mail-setup-box ul{margin:8px 0 0;padding-left:20px;line-height:1.9}
+.mail-setup-box strong{display:block;margin-bottom:4px}
 </style>
 </head>
 <body>
-
 <div class="container">
 
-    <!-- HEADER -->
-    <header>
-        <span class="mission-label">入社準備ガイド</span>
-        <h1>ようこそ Bremen Inc. へ！</h1>
-        <p class="sub">メール設定 → Slack 参加 → 書類準備 の順に進めてください</p>
-    </header>
+<!-- HEADER -->
+<header>
+    <span class="mission-label">入社準備ガイド</span>
+    <h1>ようこそ Bremen Inc. へ！</h1>
+    <p class="sub">メール → Slack → ストレングスファインダー → MBTI → プロフィール → 書類</p>
+</header>
 
-    <!-- 支給品 -->
-    <div class="key-box" id="key-box-capture">
-        <div class="key-title"><span class="material-icons">vpn_key</span>支給された情報</div>
-        <p class="key-hint"><span class="material-icons">content_copy</span>値の横の「コピー」ボタンをタップするとコピーできます</p>
-        <p class="key-warning">※このページは本人のみ。転送・公開は絶対にしないでください（パスワードが含まれています）。</p>
-        <div id="pw-expiry-notice" style="display:none; background:#fff3cd; border-left:4px solid #f9a825; border-radius:10px; padding:12px 16px; margin-bottom:12px; font-size:14px;">
-            <span class="material-icons" style="font-size:16px; vertical-align:middle; color:#f9a825;">timer_off</span>
-            <strong> パスワードの表示期限が切れました（開封から24時間）</strong><br>
-            <span style="color:#5f6368;">セキュリティのためパスワードは非表示になりました。必要な場合は管理者にお問い合わせください。</span>
+<!-- ===== 支給品 ===== -->
+<div class="key-box" id="key-box-capture">
+    <div class="key-title"><span class="material-icons">vpn_key</span>支給された情報</div>
+    <p class="key-hint"><span class="material-icons">content_copy</span>値の横の「コピー」ボタンをタップするとコピーできます</p>
+    <p class="key-warning">※このページは本人のみ。転送・公開は絶対にしないでください。</p>
+    <div id="pw-expiry-notice" style="display:none;background:#fff3cd;border-left:4px solid #f9a825;border-radius:10px;padding:12px 16px;margin-bottom:12px;font-size:14px;">
+        <span class="material-icons" style="font-size:16px;vertical-align:middle;color:#f9a825;">timer_off</span>
+        <strong> パスワードの表示期限が切れました（開封から24時間）</strong><br>
+        <span style="color:#5f6368;">セキュリティのためパスワードは非表示になりました。必要な場合は管理者にお問い合わせください。</span>
+    </div>
+    <div class="key-list">
+        <div class="key-item">
+            <span class="material-icons">email</span>
+            <div class="key-item-body"><div class="key-label">メールアドレス</div><div class="key-val" id="val-email">k.hiyama@bremen.band</div></div>
+            <button class="copy-btn" onclick="copyVal('val-email',this)" aria-label="メールアドレスをコピー"><span class="material-icons">content_copy</span>コピー</button>
         </div>
-        <div class="key-list">
-            <div class="key-item">
-                <span class="material-icons">email</span>
-                <div class="key-item-body">
-                    <div class="key-label">メールアドレス</div>
-                    <div class="key-val" id="val-email">k.hiyama@bremen.band</div>
+        <div class="key-item" id="key-item-mailpw">
+            <span class="material-icons">lock</span>
+            <div class="key-item-body"><div class="key-label">ロリポップ メール初期パスワード</div><div class="key-val" id="val-pw"></div></div>
+            <button class="copy-btn" id="copy-btn-mailpw" onclick="copyVal('val-pw',this)"><span class="material-icons">content_copy</span>コピー</button>
+        </div>
+        <div class="key-item" id="key-item-slackpw">
+            <span class="material-icons">chat</span>
+            <div class="key-item-body"><div class="key-label">Slack 初期パスワード</div><div class="key-val" id="val-slackpw"></div></div>
+            <button class="copy-btn" id="copy-btn-slackpw" onclick="copyVal('val-slackpw',this)"><span class="material-icons">content_copy</span>コピー</button>
+        </div>
+        <div class="key-item">
+            <span class="material-icons">workspaces</span>
+            <div class="key-item-body"><div class="key-label">Slack ワークスペース名</div><div class="key-val" id="val-ws">Bremen Inc.</div></div>
+            <button class="copy-btn" onclick="copyVal('val-ws',this)"><span class="material-icons">content_copy</span>コピー</button>
+        </div>
+        <div class="key-item">
+            <span class="material-icons">link</span>
+            <div class="key-item-body"><div class="key-label">Slack URL</div><div class="key-val" id="val-url">https://bremenband.slack.com</div></div>
+            <button class="copy-btn" onclick="copyVal('val-url',this)"><span class="material-icons">content_copy</span>コピー</button>
+        </div>
+    </div>
+    <button onclick="saveKeyBoxAsImage(this)" style="margin-top:14px;width:100%;background:var(--frame);color:#fff;border:none;border-radius:10px;padding:12px 16px;font-size:14px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+        <span class="material-icons" style="font-size:18px;color:#fff">save_alt</span>このエリアを画像として保存する
+    </button>
+</div>
+
+<!-- ================================================
+     PART 1 : メール設定
+================================================= -->
+
+<!-- Step 1 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">1</div><h2>Webメールでメールを確認する</h2></div>
+    <p>スマホのブラウザでロリポップの<span class="term" data-tooltip="アプリ不要でブラウザからメールを読み書きできる機能">Webメール</span>にログインし、メールが届くか確認します。</p>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        上の「支給された情報」から<strong>メールアドレス</strong>と<strong>メールパスワード</strong>をコピーして、ログインしてください。
+        <a class="action-btn" href="https://webmail.lolipop.jp/login/" target="_blank" rel="noopener"><span class="material-icons" style="font-size:16px">open_in_new</span>ロリポップ Webメールを開く</a>
+    </div>
+    <details class="screen-guide">
+        <summary>📱 画面の見え方を確認する（迷ったら開いてね）</summary>
+        <div class="guide-body">
+            <div class="mock"><div class="mock-head">Webメーラー ログイン画面</div><div class="mock-body">
+                <p style="margin:0 0 6px">メールアドレス欄 → <strong style="color:var(--red)">コピーしたメールアドレスを貼り付け</strong></p>
+                <p style="margin:0">パスワード欄 → <strong style="color:var(--red)">コピーしたパスワードを貼り付け</strong></p>
+            </div></div>
+        </div>
+    </details>
+    <div class="task-item" data-task="1" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>Webメールにログインして受信トレイを確認した</span></div>
+</div>
+
+<!-- Step 2 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">2</div><h2>スマホのメールアプリに設定する（任意）</h2></div>
+    <p>Webメールだけでも問題ありませんが、メールアプリでも使いたい場合は以下の設定を追加してください。</p>
+    <details class="screen-guide">
+        <summary>📱 メールアプリの設定値を見る</summary>
+        <div class="guide-body">
+            <div class="mail-setup-box">
+                <strong>📧 メールアプリ設定値</strong>
+                <ul>
+                    <li><strong>メールアドレス:</strong> 支給品のメールアドレス</li>
+                    <li><strong>パスワード:</strong> 支給品のメールパスワード</li>
+                    <li><strong>受信サーバー:</strong> imap.lolipop.jp（IMAP）ポート 993・SSL</li>
+                    <li><strong>送信サーバー:</strong> smtp.lolipop.jp（SMTP）ポート 465・SSL</li>
+                </ul>
+            </div>
+            <div class="caution-box">
+                ⚠️ iPhone: 設定→メール→アカウント→アカウントを追加→その他<br>
+                ⚠️ Android: メールアプリ→アカウント追加→手動設定
+            </div>
+        </div>
+    </details>
+    <div class="task-item" data-task="2" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>メールアプリへの設定が完了した（またはスキップ）</span></div>
+</div>
+
+<!-- ================================================
+     PART 2 : Slack 参加
+================================================= -->
+<div class="part-divider"><span class="part-label">PART 2</span><h2>Slack に参加する</h2><p>チームの連絡ツールに入ろう</p></div>
+
+<!-- Step 3 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">3</div><h2>Slack をインストールする（スマホ＋PC）</h2></div>
+    <p><span class="term" data-tooltip="チームでチャットや連絡を取り合うビジネス用アプリ">Slack</span> は<strong>スマホとPC両方</strong>にインストールしてください。</p>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること：スマホにインストール</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+            <a class="action-btn" href="https://apps.apple.com/jp/app/slack/id618783545" target="_blank" rel="noopener" style="background:#000"><span class="material-icons" style="font-size:16px">apple</span>App Store（iPhone）</a>
+            <a class="action-btn" href="https://play.google.com/store/apps/details?id=com.Slack" target="_blank" rel="noopener" style="background:#01875f"><span class="material-icons" style="font-size:16px">android</span>Google Play（Android）</a>
+        </div>
+    </div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること：PCにインストール</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+            <a class="action-btn" href="https://slack.com/intl/ja-jp/downloads/windows" target="_blank" rel="noopener" style="background:#0078d4"><span class="material-icons" style="font-size:16px">desktop_windows</span>Windows 版</a>
+            <a class="action-btn" href="https://slack.com/intl/ja-jp/downloads/mac" target="_blank" rel="noopener" style="background:#333"><span class="material-icons" style="font-size:16px">laptop_mac</span>Mac 版</a>
+        </div>
+    </div>
+    <div class="task-item" data-task="3" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>スマホに Slack をインストールした</span></div>
+    <div class="task-item" data-task="3b" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>PCにも Slack をインストールした</span></div>
+</div>
+
+<!-- Step 4 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">4</div><h2>招待メールからワークスペースに参加する</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        メールアプリ（または Webメール）を開き、<strong>Slack からの招待メール</strong>を探して「<strong>Bremen Inc. に参加</strong>」ボタンをタップしてください。
+    </div>
+    <details class="screen-guide">
+        <summary>📱 画面の見え方を確認する（迷ったら開いてね）</summary>
+        <div class="guide-body">
+            <div class="mock"><div class="mock-head">📧 招待メール</div><div class="mock-body">
+                <p style="margin:0 0 10px;padding:10px;background:#f8f9fa;border-radius:6px;border-left:3px solid var(--accent)"><strong>Slack</strong> から「Bremen Inc. のワークスペースに参加しましょう」<br><strong style="color:var(--red)">👈 このメールを開く</strong></p>
+                <p style="margin:0;padding:12px;background:#e8f0fe;border-radius:8px;text-align:center;font-weight:bold"><strong style="color:var(--red)">👈「Bremen Inc. に参加」ボタンをタップ</strong></p>
+            </div></div>
+        </div>
+    </details>
+    <div class="task-item" data-task="4" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>招待メールの「参加」ボタンをタップした</span></div>
+</div>
+
+<!-- Step 5 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">5</div><h2>Slack のパスワードを設定してログインする</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        パスワード設定画面が表示されたら、上の「支給された情報」から <strong>Slack 初期パスワード</strong>をコピーして入力してください。<br>
+        次回からは <strong>メールアドレス＋このパスワード</strong> でログインできます。
+    </div>
+    <div class="tip-box">💡 PC版も同じメールアドレス＋パスワードでログインすれば<strong>自動で同期</strong>されます。</div>
+    <div class="task-item" data-task="5" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>Slack にログインできて Bremen Inc. が表示された</span></div>
+</div>
+
+<!-- Step 6 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">6</div><h2>全体連絡チャンネルで挨拶を送る</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        Slack の左サイドバーから <strong>#全体連絡</strong> チャンネルを開いて、みんなに挨拶を送りましょう！<br>
+        <span style="font-size:12px;color:#5f6368">見つからない場合は「チャンネルを検索」で「全体連絡」と入力</span>
+    </div>
+    <details class="screen-guide">
+        <summary>📱 チャンネルの探し方を確認する</summary>
+        <div class="guide-body">
+            <div class="mock"><div class="mock-head">Slack サイドバー</div><div class="mock-body">
+                <div style="background:#f8f9fa;border-radius:8px;padding:10px 14px;font-size:13px">
+                    <div style="color:#999;margin-bottom:4px">チャンネル</div>
+                    <div style="padding:4px 8px;border-radius:4px;color:#5f6368"># random</div>
+                    <div style="padding:4px 8px;border-radius:4px;background:#e8f0fe;font-weight:bold;color:var(--accent)"><strong style="color:var(--red)">→</strong> # 全体連絡</div>
+                    <div style="padding:4px 8px;border-radius:4px;color:#5f6368"># general</div>
                 </div>
-                <button class="copy-btn" onclick="copyVal('val-email',this)" aria-label="メールアドレスをコピー">
-                    <span class="material-icons">content_copy</span>コピー
-                </button>
-            </div>
-            <div class="key-item" id="key-item-mailpw">
-                <span class="material-icons">lock</span>
-                <div class="key-item-body">
-                    <div class="key-label">ロリポップ メール初期パスワード</div>
-                    <div class="key-val" id="val-pw"></div>
+            </div></div>
+        </div>
+    </details>
+    <div class="info-box" style="flex-direction:column;gap:0">
+        <strong>💬 参考メッセージ（コピーして使ってください）</strong>
+        <p id="val-greet" style="margin:10px 0 12px;padding:12px;background:#fff;border:1px solid #c5d8ef;border-radius:8px;font-size:14px;line-height:1.8;white-space:pre-wrap">はじめまして！本日より入社しました、火山です。
+よろしくお願いいたします！</p>
+        <button class="copy-btn" onclick="copyVal('val-greet',this)"><span class="material-icons">content_copy</span>挨拶文をコピー</button>
+    </div>
+    <div class="task-item" data-task="6" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>全体連絡チャンネルで挨拶を送った</span></div>
+</div>
+
+<!-- ================================================
+     PART 3 : ストレングスファインダー
+================================================= -->
+<div class="part-divider"><span class="part-label">PART 3</span><h2>ストレングスファインダー</h2><p>自分の「才能」を知って、チームで活かす — 所要時間 約40分</p></div>
+
+<div class="intro-card">
+    <h2><span class="material-icons" style="color:var(--accent)">psychology</span>ストレングスファインダーとは？</h2>
+    <p style="font-size:15px;margin:0 0 14px"><span class="term" data-tooltip="正式名称「CliftonStrengths」。米国Gallup社が50年以上の研究をもとに開発した才能診断">ストレングスファインダー</span>は、米国Gallup社が開発した<strong>才能診断ツール</strong>です。177問の質問に直感で答えると、あなたの<strong>34の資質すべての順位</strong>がわかります。</p>
+    <p style="font-size:15px;margin:0 0 16px">「弱みを克服する」ではなく<strong>「強みをさらに伸ばす」</strong>という考え方が特徴です。</p>
+    <div class="domain-grid">
+        <div class="domain-card" style="background:linear-gradient(135deg,#7b1fa2,#9c27b0)"><div class="dn"><span class="material-icons" style="font-size:18px">rocket_launch</span>実行力</div>達成欲・責任感・目標志向 など</div>
+        <div class="domain-card" style="background:linear-gradient(135deg,#e65100,#ff8f00)"><div class="dn"><span class="material-icons" style="font-size:18px">campaign</span>影響力</div>活発性・指令性・自己確信 など</div>
+        <div class="domain-card" style="background:linear-gradient(135deg,#00796b,#26a69a)"><div class="dn"><span class="material-icons" style="font-size:18px">groups</span>人間関係構築力</div>共感性・個別化・調和性 など</div>
+        <div class="domain-card" style="background:linear-gradient(135deg,#0063AF,#42a5f5)"><div class="dn"><span class="material-icons" style="font-size:18px">lightbulb</span>戦略的思考力</div>学習欲・着想・分析思考 など</div>
+    </div>
+</div>
+
+<!-- Step 7 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">7</div><h2>Gallup のアカウントを作成する</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        下のリンクを開いて「<strong>アカウントの作成</strong>」をクリック → 名前・メール・パスワードを入力 → メールに届く<strong>確認コード（6桁）</strong>を入力して完了です。
+        <a class="action-btn" href="https://my.gallup.com/" target="_blank" rel="noopener"><span class="material-icons" style="font-size:16px">open_in_new</span>my.gallup.com を開く</a>
+    </div>
+    <details class="screen-guide">
+        <summary>📱 画面の見え方を確認する（迷ったら開いてね）</summary>
+        <div class="guide-body">
+            <div class="mock"><div class="mock-head">ログイン画面</div><div class="mock-body">
+                <div style="display:flex;flex-direction:column;gap:10px">
+                    <div style="padding:10px 14px;background:#f8f9fa;border-radius:8px;border:1px solid #e0e0e0;color:#999;font-size:13px">メールアドレス</div>
+                    <div style="padding:10px 14px;background:#f8f9fa;border-radius:8px;border:1px solid #e0e0e0;color:#999;font-size:13px">パスワード</div>
+                    <div style="padding:10px 14px;background:#e0e0e0;border-radius:8px;text-align:center;color:#999;font-size:13px;font-weight:bold">サインイン</div>
+                    <div style="text-align:center;margin-top:4px"><strong style="color:var(--red);font-size:14px">👇 ここをクリック 👇</strong><br><span style="color:var(--accent);font-weight:bold;font-size:14px;text-decoration:underline">アカウントの作成</span></div>
                 </div>
-                <button class="copy-btn" id="copy-btn-mailpw" onclick="copyVal('val-pw',this)" aria-label="パスワードをコピー">
-                    <span class="material-icons">content_copy</span>コピー
-                </button>
-            </div>
-            <div class="key-item" id="key-item-slackpw">
-                <span class="material-icons">chat</span>
-                <div class="key-item-body">
-                    <div class="key-label">Slack 初期パスワード</div>
-                    <div class="key-val" id="val-slackpw"></div>
+            </div></div>
+            <div class="mock"><div class="mock-head">アカウント情報を入力</div><div class="mock-body">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                    <div style="display:flex;gap:8px"><div style="flex:1;padding:10px 14px;background:#fff;border-radius:8px;border:2px solid var(--accent);font-size:13px"><span style="color:#999">名</span></div><div style="flex:1;padding:10px 14px;background:#fff;border-radius:8px;border:2px solid var(--accent);font-size:13px"><span style="color:#999">姓</span></div></div>
+                    <div style="padding:10px 14px;background:#fff;border-radius:8px;border:2px solid var(--accent);font-size:13px"><span style="color:#999">メールアドレス</span></div>
+                    <div style="padding:10px 14px;background:#fff;border-radius:8px;border:2px solid var(--accent);font-size:13px"><span style="color:#999">パスワード</span> ※8文字以上</div>
                 </div>
-                <button class="copy-btn" id="copy-btn-slackpw" onclick="copyVal('val-slackpw',this)" aria-label="Slackパスワードをコピー">
-                    <span class="material-icons">content_copy</span>コピー
-                </button>
-            </div>
-            <div class="key-item">
-                <span class="material-icons">workspaces</span>
-                <div class="key-item-body">
-                    <div class="key-label">Slack ワークスペース名</div>
-                    <div class="key-val" id="val-ws">Bremen Inc.</div>
+            </div></div>
+            <div class="mock"><div class="mock-head">確認コードを入力</div><div class="mock-body">
+                <div style="padding:12px;background:#e8f5e9;border-radius:8px;font-size:13px">📧 登録メールに届く<strong>6桁の数字</strong>をそのまま入力 → 「確認」ボタン</div>
+            </div></div>
+            <div class="tip-box">💡 メールが届かない場合は<strong>迷惑メールフォルダ</strong>を確認。送信元は no-reply@gallup.com</div>
+        </div>
+    </details>
+    <div class="task-item" data-task="7" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>Gallup アカウントを作成してログインできた</span></div>
+</div>
+
+<!-- Step 8 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">8</div><h2>アクセスコードを受け取る</h2></div>
+    <p><strong>会社からコードを発行してお渡しします</strong>ので、自分で購入する必要はありません。</p>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        Slack または対面で<strong>アクセスコード（英数字）</strong>を受け取ってください。<br>
+        <span style="font-size:13px;color:#5f6368">例: <code style="background:#f0f0f0;padding:2px 8px;border-radius:4px;font-weight:bold;letter-spacing:1px">XXXX-XXXX-XXXX-XXXX</code></span>
+    </div>
+    <div class="caution-box">⚠️ まだコードを受け取っていない場合は、Slack で<strong>濱村さん</strong>に連絡してください。</div>
+    <div class="task-item" data-task="8" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>会社からアクセスコードを受け取った</span></div>
+</div>
+
+<!-- Step 9 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">9</div><h2>コードを入力してテストを開始する</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること ①</div>
+        Gallup にログインした状態で、下のリンクからコード入力ページを開いてください。
+        <a class="action-btn" href="https://my.gallup.com/signin/CliftonStrengths" target="_blank" rel="noopener"><span class="material-icons" style="font-size:16px">open_in_new</span>コード入力ページを開く</a>
+    </div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること ②</div>
+        受け取ったコードを入力欄に貼り付けて「<strong>送信</strong>」をクリック
+    </div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること ③</div>
+        言語選択が表示されたら「<strong>日本語</strong>」を選んで「次へ」
+    </div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること ④</div>
+        「<strong>テストを開始する</strong>」ボタンをクリック → 177問の質問に直感で回答していく
+    </div>
+    <details class="screen-guide">
+        <summary>📱 各画面の見え方を確認する（迷ったら開いてね）</summary>
+        <div class="guide-body">
+            <p style="font-size:13px;color:#5f6368;margin:0 0 8px">上のリンクで直接開けない場合は、<a href="https://my.gallup.com/" target="_blank" rel="noopener">my.gallup.com</a> → 上部メニュー「<strong>コードを引き換える</strong>」から進んでください。</p>
+            <div class="mock"><div class="mock-head">コード入力画面</div><div class="mock-body">
+                <div style="padding:14px;background:#fff;border-radius:10px;border:3px solid var(--accent);font-family:monospace;font-size:18px;font-weight:900;color:var(--accent);letter-spacing:2px;text-align:center;margin-bottom:8px">XXXX-XXXX-XXXX-XXXX</div>
+                <div style="padding:12px;background:var(--accent);border-radius:8px;text-align:center;color:#fff;font-size:14px;font-weight:bold">送信 <strong style="color:var(--primary)">← クリック</strong></div>
+            </div></div>
+            <div class="mock"><div class="mock-head">言語選択画面</div><div class="mock-body">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                    <div style="padding:10px 14px;background:#f8f9fa;border-radius:8px;font-size:13px;color:#999">English</div>
+                    <div style="padding:10px 14px;background:#e8f0fe;border:2px solid var(--accent);border-radius:8px;font-size:13px;font-weight:bold;color:var(--accent)">日本語 ✓ <span style="background:var(--red);color:#fff;font-size:9px;padding:1px 6px;border-radius:99px;margin-left:8px">これを選択</span></div>
+                    <div style="padding:10px 14px;background:#f8f9fa;border-radius:8px;font-size:13px;color:#999">한국어</div>
                 </div>
-                <button class="copy-btn" onclick="copyVal('val-ws',this)" aria-label="ワークスペース名をコピー">
-                    <span class="material-icons">content_copy</span>コピー
-                </button>
-            </div>
-            <div class="key-item">
-                <span class="material-icons">link</span>
-                <div class="key-item-body">
-                    <div class="key-label">Slack URL</div>
-                    <div class="key-val" id="val-url">https://bremenband.slack.com</div>
+            </div></div>
+            <div class="mock"><div class="mock-head">テスト開始画面</div><div class="mock-body" style="text-align:center">
+                <p style="font-size:15px;font-weight:900;margin:0 0 6px">CliftonStrengths 34 の評価</p>
+                <p style="font-size:12px;color:#5f6368;margin:0 0 12px">これから177の質問が表示されます</p>
+                <div style="padding:14px;background:var(--ok);border-radius:10px;color:#fff;font-weight:bold;font-size:15px">▶ テストを開始する</div>
+            </div></div>
+            <div class="mock"><div class="mock-head">質問画面の例</div><div class="mock-body">
+                <div style="text-align:center;font-size:11px;color:#999;margin-bottom:8px"><span style="background:#f0f0f0;padding:2px 10px;border-radius:99px">質問 1 / 177</span> <span style="background:#fff3cd;padding:2px 10px;border-radius:99px;color:#e65100;font-weight:bold">⏱ 残り 20秒</span></div>
+                <div style="display:flex;align-items:center;gap:10px">
+                    <div style="flex:1;text-align:center;padding:12px 8px;background:#e8f0fe;border-radius:8px;font-size:13px;line-height:1.4">「私は目標を設定して<br>それに向かって進む」</div>
+                    <div style="font-weight:900;color:#999;font-size:11px;flex-shrink:0">← ? →</div>
+                    <div style="flex:1;text-align:center;padding:12px 8px;background:#fce4ec;border-radius:8px;font-size:13px;line-height:1.4">「私は状況に応じて<br>柔軟に対応する」</div>
                 </div>
-                <button class="copy-btn" onclick="copyVal('val-url',this)" aria-label="URLをコピー">
-                    <span class="material-icons">content_copy</span>コピー
-                </button>
+                <p style="margin:8px 0 0;font-size:11px;color:#5f6368;text-align:center">5段階で「どちらにどれくらい近いか」を選択します</p>
+            </div></div>
+        </div>
+    </details>
+    <div class="tip-box">💡 <strong>コツ: 直感を信じる！</strong> 「自然体の自分なら」で考える。迷ったらどちらでもOK。20秒を過ぎると自動で次へ。</div>
+    <div class="caution-box">⚠️ 所要時間 <strong>約30〜40分</strong>。途中で中断しても<strong>続きから再開</strong>できます。静かな場所で集中して受けてください。</div>
+    <div class="task-item" data-task="9" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>177問すべてに回答した</span></div>
+</div>
+
+<!-- Step 10 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">10</div><h2>結果を確認して吉浦さんに送る</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        テスト完了後に表示される <strong>34資質すべての順位</strong> を確認して、Slack で <strong>吉浦さんにDM</strong> で送ってください。<br>
+        下の欄に結果を入力するとメッセージが自動生成されます。
+    </div>
+    <details class="screen-guide">
+        <summary>📱 結果画面の見え方を確認する</summary>
+        <div class="guide-body">
+            <div class="mock"><div class="mock-head">🏆 結果画面の例（34資質すべてが順位付きで表示されます）</div><div class="mock-body">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                    <div style="display:flex;align-items:center;gap:8px"><span style="background:#7b1fa2;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0">1</span><span style="font-weight:bold;font-size:14px">着想（Ideation）</span><span style="font-size:11px;color:#5f6368;margin-left:auto">戦略的思考力</span></div>
+                    <div style="display:flex;align-items:center;gap:8px"><span style="background:#e65100;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0">2</span><span style="font-weight:bold;font-size:14px">活発性（Activator）</span><span style="font-size:11px;color:#5f6368;margin-left:auto">影響力</span></div>
+                    <div style="display:flex;align-items:center;gap:8px"><span style="background:#00796b;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0">3</span><span style="font-weight:bold;font-size:14px">個別化（Individualization）</span><span style="font-size:11px;color:#5f6368;margin-left:auto">人間関係構築力</span></div>
+                    <p style="margin:6px 0 0;font-size:12px;color:#999;text-align:center">... 4位〜34位まですべて表示されます</p>
+                </div>
+            </div></div>
+            <div class="tip-box">💡 Gallupサイトで<strong>PDFレポート</strong>もダウンロードできます。保存がおすすめ！</div>
+        </div>
+    </details>
+    <div class="result-area">
+        <p style="margin:0 0 8px;font-size:13px;font-weight:bold;color:var(--accent)">34資質の順位を入力（メッセージに自動反映）</p>
+        <textarea id="top5-input" placeholder="例:&#10;1. 着想&#10;2. 活発性&#10;3. 個別化&#10;4. 戦略性&#10;5. 最上志向&#10;6. コミュニケーション&#10;...&#10;34. 規律性" oninput="updateSfMsg()" style="min-height:140px"></textarea>
+    </div>
+    <div class="caution-box">⚠️ PDFレポートの画面を<strong>スクリーンショット</strong>して送るのでもOKです！</div>
+    <div class="info-box" style="flex-direction:column;gap:0">
+        <strong>💬 吉浦さんへのメッセージ（コピーして DM で送信）</strong>
+        <p id="val-sf-msg" style="margin:10px 0 12px;padding:12px;background:#fff;border:1px solid #c5d8ef;border-radius:8px;font-size:14px;line-height:1.8;white-space:pre-wrap">吉浦さん、お疲れ様です！
+ストレングスファインダーの結果が出ました。
+
+【私の34資質】
+（上の欄に入力すると自動反映されます）
+
+よろしくお願いします！</p>
+        <button class="copy-btn" onclick="copyVal('val-sf-msg',this)"><span class="material-icons">content_copy</span>メッセージをコピー</button>
+    </div>
+    <div class="task-item" data-task="10" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>34資質の結果を吉浦さんに Slack DM で送った</span></div>
+</div>
+
+<!-- ================================================
+     PART 4 : MBTI
+================================================= -->
+<div class="part-divider"><span class="part-label">PART 4</span><h2>MBTI 性格診断</h2><p>自分の「性格タイプ」を知る — 所要時間 約15分</p></div>
+
+<div class="intro-card">
+    <h2><span class="material-icons" style="color:#e65100">fingerprint</span>MBTI とは？</h2>
+    <p style="font-size:15px;margin:0 0 14px"><span class="term" data-tooltip="Myers-Briggs Type Indicator。人の性格を16タイプに分類する心理学的フレームワーク">MBTI</span>は、人の性格を<strong>16タイプ</strong>に分類する心理学ベースの診断です。</p>
+    <div class="mbti-grid">
+        <div class="mbti-card" style="background:linear-gradient(135deg,#1565c0,#42a5f5)"><div class="md">E ↔ I</div><div style="font-size:12px;opacity:.9">外向型 ↔ 内向型</div></div>
+        <div class="mbti-card" style="background:linear-gradient(135deg,#2e7d32,#66bb6a)"><div class="md">S ↔ N</div><div style="font-size:12px;opacity:.9">感覚型 ↔ 直観型</div></div>
+        <div class="mbti-card" style="background:linear-gradient(135deg,#c62828,#ef5350)"><div class="md">T ↔ F</div><div style="font-size:12px;opacity:.9">思考型 ↔ 感情型</div></div>
+        <div class="mbti-card" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc)"><div class="md">J ↔ P</div><div style="font-size:12px;opacity:.9">判断型 ↔ 知覚型</div></div>
+    </div>
+    <p style="font-size:13px;color:#5f6368;margin:8px 0 0">例: <strong>ENFP</strong>（広報運動家）= 外向的・直観的・感情型・知覚型<br>Bremen ではストレングスファインダーと<strong>両方</strong>を組み合わせてチームを理解します。</p>
+</div>
+
+<!-- Step 11 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">11</div><h2>MBTI テストを受ける</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        下のリンクから<strong>無料テスト</strong>を受けてください（約15分）。アカウント登録も不要です。<br>質問に直感で答えるだけで結果が表示されます。
+        <a class="action-btn" href="https://www.16personalities.com/ja/%E6%80%A7%E6%A0%BC%E8%A8%BA%E6%96%AD%E3%83%86%E3%82%B9%E3%83%88" target="_blank" rel="noopener" style="background:#6a1b9a"><span class="material-icons" style="font-size:16px">open_in_new</span>16Personalities テストを開く</a>
+    </div>
+    <div class="tip-box">💡 ストレングスファインダーと同様、「仕事モード」ではなく<strong>自然体の自分</strong>で答えてください。</div>
+    <div class="task-item" data-task="11" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>MBTI テストに回答した</span></div>
+</div>
+
+<!-- Step 12 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">12</div><h2>MBTI の結果を吉浦さんに送る</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        結果画面に表示される<strong>4文字のタイプ</strong>（例: ENFP）を確認して、Slack で<strong>吉浦さんにDM</strong>で送ってください。
+    </div>
+    <details class="screen-guide">
+        <summary>📱 結果画面の見え方を確認する</summary>
+        <div class="guide-body">
+            <div class="mock"><div class="mock-head">🏆 結果画面の例</div><div class="mock-body" style="text-align:center">
+                <div style="font-size:11px;color:#5f6368;margin-bottom:4px">あなたの性格タイプ</div>
+                <div style="font-size:28px;font-weight:900;color:#6a1b9a;letter-spacing:4px;margin-bottom:4px">ENFP</div>
+                <div style="font-size:14px;font-weight:bold;color:#333">広報運動家</div>
+                <div style="font-size:12px;color:#5f6368;margin-top:6px">情熱的で創造力豊か、社交的な自由人</div>
+            </div></div>
+        </div>
+    </details>
+    <div class="result-area">
+        <p style="margin:0 0 8px;font-size:13px;font-weight:bold;color:#6a1b9a">あなたの結果を入力（メッセージに自動反映）</p>
+        <textarea id="mbti-input" placeholder="例: ENFP（広報運動家）" oninput="updateMbtiMsg()" style="min-height:50px"></textarea>
+    </div>
+    <div class="info-box" style="flex-direction:column;gap:0;border-left-color:#6a1b9a;background:#f3e5f5">
+        <strong>💬 吉浦さんへのメッセージ（コピーして DM で送信）</strong>
+        <p id="val-mbti-msg" style="margin:10px 0 12px;padding:12px;background:#fff;border:1px solid #ce93d8;border-radius:8px;font-size:14px;line-height:1.8;white-space:pre-wrap">吉浦さん、お疲れ様です！
+MBTIの結果が出ました。
+
+【私のタイプ】
+（上の欄に入力すると自動反映されます）
+
+よろしくお願いします！</p>
+        <button class="copy-btn" onclick="copyVal('val-mbti-msg',this)" style="background:#6a1b9a"><span class="material-icons">content_copy</span>メッセージをコピー</button>
+    </div>
+    <div class="task-item" data-task="12" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>MBTI の結果を吉浦さんに Slack DM で送った</span></div>
+</div>
+
+<!-- ================================================
+     PART 5 : プロフィール
+================================================= -->
+<div class="part-divider"><span class="part-label">PART 5</span><h2>プロフィールページの入力</h2><p>Notion にあなたの情報を登録 — チームの「名刺」になります</p></div>
+
+<div class="section" style="border-top:4px solid var(--primary)">
+    <div style="background:linear-gradient(135deg,#fff8e1,#fff3e0);border-radius:14px;padding:20px;margin:0 0 16px;border:1px solid #ffe0b2">
+        <p style="font-size:16px;font-weight:900;color:#e65100;margin:0 0 10px;display:flex;align-items:center;gap:8px"><span class="material-icons" style="font-size:22px">favorite</span>Bremen は「人の繋がり」を大切にしています</p>
+        <p style="font-size:14px;color:#333;margin:0 0 10px;line-height:1.8">Bremen はツールや数字だけで動く会社ではありません。<br><strong>「この人はどんな人なんだろう？」「何が好きなんだろう？」</strong>——<br>そんな興味から始まるコミュニケーションが、チームの強さの源です。</p>
+        <p style="font-size:14px;color:#333;margin:0;line-height:1.8">プロフィールは、あなたのことをチームに知ってもらうための<strong>自己紹介カード</strong>です。<br>恥ずかしがらずに、ぜひ自分らしく書いてください！<br>他のメンバーのプロフィールも見てみると、雰囲気がつかめると思います 😊</p>
+    </div>
+    <div class="why-grid">
+        <div class="why-item"><div class="why-icon" style="background:#e8f0fe">📋</div><div><h3>チームがあなたを知る</h3><p>「はじめまして」の距離がぐっと縮まる、社内の名刺です。</p></div></div>
+        <div class="why-item"><div class="why-icon" style="background:#fce4ec">🤖</div><div><h3>AIがあなたを理解する</h3><p>プロフィール情報はAIチーム（Orchestra）にも共有され、あなたに最適化された対話が可能に。</p></div></div>
+        <div class="why-item"><div class="why-icon" style="background:#fff8e1">🎂</div><div><h3>誕生日はみんなでお祝い！</h3><p>登録してくれたら、チームからお祝いメッセージが届きます。</p></div></div>
+    </div>
+</div>
+
+<!-- Step 13 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">13</div><h2>Notion でプロフィールページを開く</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        下のリンクからプロフィールページを開いてください。Notion のアカウントでログインが必要です。
+        <a class="action-btn" href="https://www.notion.so/54863d3edebf49429e2dbd1d258d4e5b" target="_blank" rel="noopener" style="background:#000"><span class="material-icons" style="font-size:16px">open_in_new</span>Notion プロフィールページを開く</a>
+    </div>
+    <div class="caution-box">⚠️ ページが開けない場合は、Notion に支給メールアドレスでログインしてください。それでも開けなければ Slack で濱村さんに連絡を。</div>
+    <div class="task-item" data-task="13" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>Notion でプロフィールページを開けた</span></div>
+</div>
+
+<!-- Step 14 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">14</div><h2>プロフィール情報を入力する</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        以下の項目を入力・確認してください。空欄を埋めてもらえるとチーム全体が助かります！<br>
+        ストレングスファインダー（PART 3）と MBTI（PART 4）の結果もそのまま入力すればOK。
+    </div>
+    <details class="screen-guide">
+        <summary>📱 入力する項目を確認する</summary>
+        <div class="guide-body">
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8f9fa;border-radius:6px"><span class="material-icons" style="font-size:16px;color:var(--accent)">person</span><strong>名前・読み</strong><span style="color:#999;margin-left:auto;font-size:11px">漢字＋ふりがな</span></div>
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8f9fa;border-radius:6px"><span class="material-icons" style="font-size:16px;color:var(--accent)">work</span><strong>部署・役職</strong><span style="color:#999;margin-left:auto;font-size:11px">確認でOK</span></div>
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8f9fa;border-radius:6px"><span class="material-icons" style="font-size:16px;color:var(--accent)">cake</span><strong>誕生日</strong><span style="color:#999;margin-left:auto;font-size:11px">チームでお祝い!</span></div>
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#e8f5e9;border-radius:6px;border:1px solid #a5d6a7"><span class="material-icons" style="font-size:16px;color:var(--ok)">psychology</span><strong>ストレングスファインダー 34資質</strong><span style="color:var(--ok);margin-left:auto;font-size:11px">PART 3 の結果</span></div>
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f3e5f5;border-radius:6px;border:1px solid #ce93d8"><span class="material-icons" style="font-size:16px;color:#6a1b9a">fingerprint</span><strong>MBTI タイプ</strong><span style="color:#6a1b9a;margin-left:auto;font-size:11px">PART 4 の結果</span></div>
+                <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8f9fa;border-radius:6px"><span class="material-icons" style="font-size:16px;color:var(--accent)">photo_camera</span><strong>プロフィール写真</strong><span style="color:#999;margin-left:auto;font-size:11px">任意</span></div>
             </div>
         </div>
-        <button onclick="saveKeyBoxAsImage(this)" style="margin-top:14px; width:100%; background:var(--frame-color); color:#fff; border:none; border-radius:10px; padding:12px 16px; font-size:14px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; -webkit-tap-highlight-color:transparent;">
-            <span class="material-icons" style="font-size:18px; color:#fff;">save_alt</span>このエリアを画像として保存する
-        </button>
+    </details>
+    <div class="task-item" data-task="14" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>プロフィール情報を入力した</span></div>
+</div>
+
+<!-- ================================================
+     PART 6 : 入社書類
+================================================= -->
+<div class="part-divider"><span class="part-label">PART 6</span><h2>入社書類・口座の準備</h2><p>必要書類を濱村さんに提出</p></div>
+
+<!-- Step 15 -->
+<div class="section">
+    <div class="section-head"><div class="step-badge">15</div><h2>書類をそろえて濱村さんに送る</h2></div>
+    <div class="action">
+        <div class="action-label"><span class="material-icons">mouse</span>やること</div>
+        以下の書類・情報を<strong>濱村さんの Slack DM</strong> に送信してください。写真を撮って送るだけでOKです。
     </div>
 
-    <!-- =========================================
-         PART 1: メール設定
-    ========================================= -->
+    <p style="font-weight:bold;margin:16px 0 8px">社会保険・厚生年金関連</p>
+    <span class="deadline">提出済み ✓</span>
+    <div class="task-item" data-task="15a" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>① マイナンバー入りの住民票</span></div>
+    <div class="task-item" data-task="15b" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>② 雇用保険被保険者番号、もしくは前職名</span></div>
+    <div class="task-item" data-task="15c" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>③ 年金番号がわかる書類のコピー</span></div>
+    <div class="task-item" data-task="15d" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>④ 運転免許証</span></div>
 
-    <!-- Step 1 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">1</div>
-            <h2>ロリポップのWebメールでメールを確認する</h2>
-        </div>
-        <p>まず、スマホのブラウザでロリポップの<span class="term" data-tooltip="【Webメールとは】アプリ不要でブラウザからメールを読み書きできる機能">Webメール</span>にアクセスし、メールが届くことを確認しましょう。</p>
-        <div class="info-box">
-            <strong>📱 ロリポップ！Webメールを開く</strong>
-            <p style="margin:0;">上の「支給された情報」から<strong>メールアドレス</strong>と<strong>メールパスワード</strong>をコピーし、ログインします。</p>
-            <a href="https://webmail.lolipop.jp/login/" target="_blank" rel="noopener">
-                <span class="material-icons" style="font-size:16px;">open_in_new</span>
-                ロリポップ！新WEBメーラーを開く
-            </a>
-        </div>
-        <div class="ui-mockup">
-            <div class="ui-header">📱 Webメーラー ログイン画面</div>
-            <div class="ui-body">
-                <p style="margin:0 0 6px;">メールアドレス欄 → <strong style="color:var(--red);">コピーしたメールアドレスを貼り付け 👈</strong></p>
-                <p style="margin:0;">パスワード欄 → <strong style="color:var(--red);">コピーしたパスワードを貼り付け 👈</strong></p>
-            </div>
-        </div>
-        <div class="task-item" data-task="1" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>ロリポップWebメールにログインして、受信トレイを確認した</span>
-        </div>
-    </div>
+    <p style="font-weight:bold;margin:20px 0 8px">事業関連</p>
+    <span class="deadline">提出済み ✓</span>
+    <div class="task-item" data-task="15e" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>⑤ 給与用銀行口座</span></div>
+    <div class="task-item" data-task="15f" onclick="toggleTask(this)"><div class="task-checkbox"></div><span>⑥ ゆうちょ銀行口座（買取金のやりとりに使用します）</span></div>
+</div>
 
-    <!-- Step 2 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">2</div>
-            <h2>スマホのメールアプリに設定する（任意）</h2>
-        </div>
-        <p>Webメールだけでも問題ありませんが、スマホのメールアプリからも使いたい場合は以下の設定を追加してください。</p>
-        <div class="mail-setup-box">
-            <strong>📧 メールアプリ設定値</strong>
-            <ul>
-                <li><strong>メールアドレス:</strong> 支給品のメールアドレス</li>
-                <li><strong>パスワード:</strong> 上記支給品のロリポップメールパスワード</li>
-                <li><strong>受信サーバー:</strong> imap.lolipop.jp（IMAP）ポート 993・SSL</li>
-                <li><strong>送信サーバー:</strong> smtp.lolipop.jp（SMTP）ポート 465・SSL</li>
-            </ul>
-        </div>
-        <div class="caution-box">
-            ⚠️ iPhone: 設定 → メール → アカウント → アカウントを追加 → その他<br>
-            ⚠️ Android: メールアプリ → アカウント追加 → 手動設定
-        </div>
-        <div class="task-item" data-task="2" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>メールアプリへの設定が完了した（またはスキップ）</span>
-        </div>
-    </div>
+<!-- 締め -->
+<div class="section" style="text-align:center;border-top:4px solid var(--primary)">
+    <p style="font-size:28px;margin:0 0 8px">🎉</p>
+    <p style="font-size:20px;font-weight:900;color:#111;margin:0 0 12px">すべて完了！お疲れ様でした！</p>
+    <p style="font-size:15px;color:#5f6368;margin:0;line-height:1.8">メール・Slack・ストレングスファインダー・MBTI・プロフィール・書類 —<br>すべてのステップが完了しました。<br><br>わからないことがあればいつでも Slack で聞いてください。<br><strong>Bremen Inc. 一同、あなたの参加を歓迎しています！</strong></p>
+</div>
 
-    <!-- =========================================
-         PART 2: Slack 参加
-    ========================================= -->
-
-    <!-- Step 3 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">3</div>
-            <h2>Slack アプリをインストールする</h2>
-        </div>
-        <p>スマホに <span class="term" data-tooltip="【Slackとは】チームでチャットや連絡を取り合うビジネス用アプリです">Slack</span> アプリをインストールしてください。下のボタンからそのまま開けます。</p>
-        <div class="info-box" style="display:flex; flex-direction:column; gap:10px;">
-            <strong>📲 ストアから直接インストール</strong>
-            <a href="https://apps.apple.com/jp/app/slack/id618783545" target="_blank" rel="noopener" style="background:#000; justify-content:center;">
-                <span class="material-icons" style="font-size:16px;">apple</span>
-                App Store でダウンロード（iPhone）
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.Slack" target="_blank" rel="noopener" style="background:#01875f; justify-content:center;">
-                <span class="material-icons" style="font-size:16px;">android</span>
-                Google Play でダウンロード（Android）
-            </a>
-        </div>
-        <div class="task-item" data-task="3" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>Slack アプリをインストールした</span>
-        </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">4</div>
-            <h2>招待メールを開いてワークスペースに参加する</h2>
-        </div>
-        <p>Webメール（Step 1）または設定したメールアプリで受信トレイを確認し、<strong>Slack からの招待メール</strong>を開いてください。</p>
-        <div class="ui-mockup">
-            <div class="ui-header">📧 招待メール</div>
-            <div class="ui-body">
-                <p style="margin:0 0 10px; padding:10px; background:#f8f9fa; border-radius:6px; border-left:3px solid var(--accent-blue);">
-                    <strong>Slack</strong> から「Bremen Inc. のワークスペースに参加しましょう」<br>
-                    <strong style="color:var(--red);">👈 このメールを開く</strong>
-                </p>
-                <p style="margin:0; padding:12px; background:#e8f0fe; border-radius:8px; text-align:center; font-weight:bold;">
-                    <strong style="color:var(--red);">👈「Bremen Inc. に参加」ボタンをタップ</strong>
-                </p>
-            </div>
-        </div>
-        <p>ボタンをタップすると Slack アプリが開き、<span class="term" data-tooltip="【ワークスペースとは】Slackで、ひとつの会社やチームが使う場のこと">ワークスペース</span>参加フローが始まります。</p>
-        <div class="task-item" data-task="4" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>招待メールの「参加」ボタンをタップした</span>
-        </div>
-    </div>
-
-    <!-- Step 5 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">5</div>
-            <h2>Slack のパスワードを設定してログインする</h2>
-        </div>
-        <p>招待メールから参加フローに進むと、Slack のパスワード設定画面が表示されます。支給品の初期パスワードを入力してログインしてください。<br>次回からは <strong>メールアドレス ＋ 初期パスワード</strong> でログインできます。</p>
-        <div class="ui-mockup">
-            <div class="ui-header">Slack — パスワードを設定</div>
-            <div class="ui-body">
-                <p style="margin:0 0 4px; font-size:13px; color:#5f6368;">初期パスワード（支給品）</p>
-                <p style="margin:0 0 2px; padding:8px 12px; background:#fff3cd; border:1px solid #f9a825; border-radius:6px; font-family:monospace; font-weight:bold;" id="step5-current-slackpw"></p>
-            </div>
-        </div>
-        <div class="task-item" data-task="5" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>Slack にログインできて、Bremen Inc. が表示された</span>
-        </div>
-    </div>
-
-    <!-- Step 6: 濱村さんへ挨拶 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">6</div>
-            <h2>濱村さんの Slack へ挨拶を送る</h2>
-        </div>
-        <p>Slack に参加できたら、まず濱村さんにダイレクトメッセージで挨拶を送りましょう。以下の参考文をそのままコピーして使えます。</p>
-        <div class="info-box" style="flex-direction:column; gap:0;">
-            <strong>💬 参考メッセージ（コピーして使ってください）</strong>
-            <p id="val-greet" style="margin:10px 0 12px; padding:12px; background:#fff; border:1px solid #c5d8ef; border-radius:8px; font-size:14px; line-height:1.8; white-space:pre-wrap;">濱村さん、こんにちは！
-このたびお世話になります、火山です。
-本日より Slack に参加しました。どうぞよろしくお願いいたします。</p>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                <button class="copy-btn" onclick="copyVal('val-greet',this)" aria-label="挨拶文をコピー">
-                    <span class="material-icons">content_copy</span>挨拶文をコピー
-                </button>
-                <a href="slack://user?id=D01KBJMJ51U" class="copy-btn" style="text-decoration:none; background:#4a154b;" aria-label="濱村さんのDMを開く">
-                    <span class="material-icons" style="font-size:16px;">chat</span>濱村さんのDMを開く
-                </a>
-            </div>
-        </div>
-        <div class="task-item" data-task="6" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>濱村さんへ Slack で挨拶を送った</span>
-        </div>
-    </div>
-
-    <!-- =========================================
-         PART 3: 入社書類の準備
-    ========================================= -->
-
-    <!-- Step 7 -->
-    <div class="section">
-        <div class="section-head">
-            <div class="step-badge">7</div>
-            <h2>入社書類・口座を準備する</h2>
-        </div>
-        <p>以下を濱村さんのDMに送信してください。</p>
-
-        <p style="font-weight:bold; margin-bottom:8px;">社会保険・厚生年金関連</p>
-        <span class="deadline" style="background:#1e8e3e;">提出済み ✓</span>
-        <div class="task-item" data-task="7" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>① マイナンバー入りの住民票</span>
-        </div>
-        <div class="task-item" data-task="8" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>② 雇用保険被保険者番号、もしくは前職名</span>
-        </div>
-        <div class="task-item" data-task="9" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>③ 年金番号がわかる書類のコピー</span>
-        </div>
-        <div class="task-item" data-task="10" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>④ 運転免許証</span>
-        </div>
-
-        <p style="font-weight:bold; margin:20px 0 8px;">事業関連</p>
-        <span class="deadline" style="background:#1e8e3e;">提出済み ✓</span>
-        <div class="task-item" data-task="11" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>⑤ 給与用銀行口座</span>
-        </div>
-        <div class="task-item" data-task="12" onclick="toggleTask(this)">
-            <div class="task-checkbox"></div>
-            <span>⑥ ゆうちょ銀行口座（買取金のやりとりに使用します）</span>
-        </div>
-    </div>
-
-    <!-- 締めの挨拶 -->
-    <div class="section" style="text-align:center; border-top: 4px solid var(--primary);">
-        <p style="font-size:22px; margin:0 0 8px;">🎉</p>
-        <p style="font-size:17px; font-weight:900; color:#111; margin:0 0 12px;">お疲れ様でした！</p>
-        <p style="font-size:15px; color:#5f6368; margin:0;">わからないことがあればいつでも Slack で聞いてください。<br>Bremen Inc. 一同、あなたの参加を歓迎しています！</p>
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer-actions">
-        <button class="fix-btn" onclick="copyHtmlForUpdate()">
-            <span class="material-icons" style="font-size:14px;">update</span> 管理者用：最新環境へアップデート
-        </button>
-        <p style="margin-top:6px; font-size:10px; color:#999;">現在のコードと更新用プロンプトをコピーします。</p>
-    </div>
+<!-- FOOTER -->
+<div class="footer-actions">
+    <button class="fix-btn" onclick="copyHtmlForUpdate()"><span class="material-icons" style="font-size:14px">update</span> 管理者用：最新環境へアップデート</button>
+    <p style="margin-top:6px;font-size:10px;color:#999">現在のコードと更新用プロンプトをコピーします。</p>
+</div>
 
 </div><!-- /container -->
 
 <!-- 非公開確認モーダル -->
-<div id="unpublishModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9998; align-items:center; justify-content:center; padding:24px;">
-    <div style="background:#fff; border-radius:20px; padding:32px 24px; max-width:420px; width:100%; box-shadow:0 8px 40px rgba(0,0,0,0.25); text-align:center;">
-        <p style="font-size:32px; margin:0 0 8px;">🔒</p>
-        <p style="font-size:18px; font-weight:900; color:#111; margin:0 0 10px;">全ステップ完了おめでとうございます！</p>
-        <p style="font-size:14px; color:#5f6368; margin:0 0 20px; line-height:1.7;">このページを非公開にしますか？<br>非公開にすると URL にアクセスできなくなります。<br>復帰は管理者のみが対応できます。</p>
-        <div id="unpublishCmd" style="display:none; text-align:left; margin-bottom:20px;">
-            <p style="font-size:12px; color:#5f6368; margin:0 0 6px;">管理者用コマンド（ターミナルで実行）</p>
-            <div style="background:#1e1e1e; border-radius:8px; padding:12px 14px; font-family:monospace; font-size:12px; color:#d4d4d4; word-break:break-all; position:relative;">
+<div id="unpublishModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;align-items:center;justify-content:center;padding:24px">
+    <div style="background:#fff;border-radius:20px;padding:32px 24px;max-width:420px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.25);text-align:center">
+        <p style="font-size:32px;margin:0 0 8px">🔒</p>
+        <p style="font-size:18px;font-weight:900;color:#111;margin:0 0 10px">全ステップ完了おめでとうございます！</p>
+        <p style="font-size:14px;color:#5f6368;margin:0 0 20px;line-height:1.7">このページを非公開にしますか？<br>非公開にするとURLにアクセスできなくなります。</p>
+        <div id="unpublishCmd" style="display:none;text-align:left;margin-bottom:20px">
+            <p style="font-size:12px;color:#5f6368;margin:0 0 6px">管理者用コマンド</p>
+            <div style="background:#1e1e1e;border-radius:8px;padding:12px 14px;font-family:monospace;font-size:12px;color:#d4d4d4;word-break:break-all;position:relative">
                 <span id="unpublishCmdText">gh api repos/komatsu-matsuko/slack-invite --method PATCH --field private=true</span>
-                <button onclick="copyUnpublishCmd()" style="position:absolute; top:8px; right:8px; background:#444; border:none; border-radius:6px; color:#fff; font-size:11px; padding:4px 10px; cursor:pointer; display:flex; align-items:center; gap:4px;">
-                    <span class="material-icons" style="font-size:13px; color:#fff;">content_copy</span>コピー
-                </button>
+                <button onclick="copyUnpublishCmd()" style="position:absolute;top:8px;right:8px;background:#444;border:none;border-radius:6px;color:#fff;font-size:11px;padding:4px 10px;cursor:pointer">コピー</button>
             </div>
-            <p style="font-size:12px; color:#d93025; margin:8px 0 0;">⚠️ 実行後すぐにページは 404 になります。復旧は管理者のみ対応可能です。</p>
         </div>
-        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-            <button onclick="closeUnpublishModal()" style="background:#f8f9fa; border:2px solid #ddd; border-radius:10px; padding:12px 24px; font-size:15px; font-weight:bold; cursor:pointer; color:#5f6368;">いいえ、戻る</button>
-            <button id="unpublishYesBtn" onclick="showUnpublishCmd()" style="background:var(--red); border:none; border-radius:10px; padding:12px 24px; font-size:15px; font-weight:bold; cursor:pointer; color:#fff;">はい、非公開にする</button>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <button onclick="closeUnpublishModal()" style="background:#f8f9fa;border:2px solid #ddd;border-radius:10px;padding:12px 24px;font-size:15px;font-weight:bold;cursor:pointer;color:#5f6368">いいえ、戻る</button>
+            <button id="unpublishYesBtn" onclick="showUnpublishCmd()" style="background:var(--red);border:none;border-radius:10px;padding:12px 24px;font-size:15px;font-weight:bold;cursor:pointer;color:#fff">はい、非公開にする</button>
         </div>
     </div>
 </div>
@@ -599,279 +698,66 @@
 <div class="progress-container">
     <div class="progress-frame">
         <div class="progress-bar" id="progressBar">
-            <div class="progress-char">
-                <img src="https://yutani8013f70550-cmqpt.wordpress.com/wp-content/uploads/2026/02/e3818ae38198e382ade383a3e38383e38388-e9a194e381a0e38191.png" alt="cat">
-            </div>
+            <div class="progress-char"><img src="https://yutani8013f70550-cmqpt.wordpress.com/wp-content/uploads/2026/02/e3818ae38198e382ade383a3e38383e38388-e9a194e381a0e38191.png" alt="cat"></div>
         </div>
     </div>
 </div>
 
-<!-- トースト -->
 <div id="copyToast" class="toast" aria-live="polite"></div>
 
 <script>
-/* ==============================
-   定数
-============================== */
-const STORAGE_KEY = 'bremen_tasks_v1';
-// パスワードはJSで組み立て（HTMLソースに直書きしない）
-// 初回開封時刻を記録し、24時間後に自動マスク
-const PW_EXPIRY_KEY  = 'bremen_pw_opened_at_v1';
-const PW_EXPIRY_MS   = 24 * 60 * 60 * 1000; // 24時間
-// パスワード（分割して難読化）
-const _MP = ['h3AH','T7y6','xEgs','4_'].join('');   // ロリポップ メールパスワード
-const _SP = ['_nGn','rciL','SL5R','lc'].join(''); // Slack 初期パスワード
+var STORAGE_KEY = 'bremen_tasks_v3';
+var PW_EXPIRY_KEY = 'bremen_pw_opened_at_v1';
+var PW_EXPIRY_MS = 24*60*60*1000;
+var _MP = ['h3AH','T7y6','xEgs','4_'].join('');
+var _SP = ['_nGn','rciL','SL5R','lc'].join('');
 
-/* ==============================
-   初期化
-============================== */
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', function(){
     initPasswords();
     restoreTasks();
     updateProgress();
-    updatePwReport();
 });
 
-/* ==============================
-   パスワード表示・24時間自動マスク
-============================== */
-function initPasswords() {
-    var now = Date.now();
-    var openedAt = null;
-    try { openedAt = parseInt(localStorage.getItem(PW_EXPIRY_KEY) || '0', 10); } catch(e) {}
-
-    // 初回アクセスなら時刻を記録
-    if (!openedAt) {
-        try { localStorage.setItem(PW_EXPIRY_KEY, String(now)); } catch(e) {}
-        openedAt = now;
-    }
-
-    var expired = (now - openedAt) >= PW_EXPIRY_MS;
-
-    if (expired) {
-        maskPasswords();
-    } else {
-        // パスワードを表示
-        var elMail  = document.getElementById('val-pw');
-        var elSlack = document.getElementById('val-slackpw');
-        if (elMail)  elMail.textContent  = _MP;
-        if (elSlack) elSlack.textContent = _SP;
-
-        // Step1・Step5 の「現在のパスワード」欄にも初期値を表示
-        var el1 = document.getElementById('step1-current-mailpw');
-        var el5 = document.getElementById('step5-current-slackpw');
-        if (el1) el1.textContent = _MP;
-        if (el5) el5.textContent = _SP;
-
-        // 残り時間で自動マスクのタイマーをセット
-        var remaining = PW_EXPIRY_MS - (now - openedAt);
-        setTimeout(maskPasswords, remaining);
-    }
+function initPasswords(){
+    var now=Date.now(), openedAt=0;
+    try{openedAt=parseInt(localStorage.getItem(PW_EXPIRY_KEY)||'0',10)}catch(e){}
+    if(!openedAt){try{localStorage.setItem(PW_EXPIRY_KEY,String(now))}catch(e){} openedAt=now}
+    if((now-openedAt)>=PW_EXPIRY_MS){maskPasswords();return}
+    var e1=document.getElementById('val-pw'),e2=document.getElementById('val-slackpw');
+    if(e1)e1.textContent=_MP; if(e2)e2.textContent=_SP;
+    setTimeout(maskPasswords, PW_EXPIRY_MS-(now-openedAt));
 }
 
-function maskPasswords() {
-    var masked = '••••••••  （24時間経過のため非表示）';
-    var maskedAddr = '••••••••••••••••  （24時間経過のため非表示）';
-
-    // メールアドレス
-    var elEmail = document.getElementById('val-email');
-    if (elEmail) { elEmail.textContent = maskedAddr; elEmail.style.color = '#aaa'; elEmail.style.fontSize = '13px'; }
-    var btnEmail = document.querySelector('[aria-label="メールアドレスをコピー"]');
-    if (btnEmail) { btnEmail.disabled = true; btnEmail.style.opacity = '0.4'; }
-
-    // ロリポップ メールパスワード
-    var elMail  = document.getElementById('val-pw');
-    var elSlack = document.getElementById('val-slackpw');
-    if (elMail)  { elMail.textContent  = masked; elMail.style.color = '#aaa'; elMail.style.fontSize = '13px'; }
-    if (elSlack) { elSlack.textContent = masked; elSlack.style.color = '#aaa'; elSlack.style.fontSize = '13px'; }
-
-    // Step1・Step5 の初期パスワード表示欄もマスク
-    var el1 = document.getElementById('step1-current-mailpw');
-    var el5 = document.getElementById('step5-current-slackpw');
-    if (el1) { el1.textContent = '••••••••'; el1.style.color = '#aaa'; }
-    if (el5) { el5.textContent = '••••••••'; el5.style.color = '#aaa'; }
-
-    // コピーボタンを無効化
-    var btnMail  = document.getElementById('copy-btn-mailpw');
-    var btnSlack = document.getElementById('copy-btn-slackpw');
-    if (btnMail)  { btnMail.disabled  = true; btnMail.style.opacity  = '0.4'; }
-    if (btnSlack) { btnSlack.disabled = true; btnSlack.style.opacity = '0.4'; }
-
-    // 期限切れ案内を表示
-    var notice = document.getElementById('pw-expiry-notice');
-    if (notice) notice.style.display = 'block';
+function maskPasswords(){
+    var m='••••••••  （24時間経過のため非表示）',ma='••••••••••••••••  （24時間経過のため非表示）';
+    var el=document.getElementById('val-email'); if(el){el.textContent=ma;el.style.color='#aaa';el.style.fontSize='13px'}
+    var b=document.querySelector('[aria-label="メールアドレスをコピー"]'); if(b){b.disabled=true;b.style.opacity='.4'}
+    var e1=document.getElementById('val-pw'),e2=document.getElementById('val-slackpw');
+    if(e1){e1.textContent=m;e1.style.color='#aaa';e1.style.fontSize='13px'}
+    if(e2){e2.textContent=m;e2.style.color='#aaa';e2.style.fontSize='13px'}
+    var b1=document.getElementById('copy-btn-mailpw'),b2=document.getElementById('copy-btn-slackpw');
+    if(b1){b1.disabled=true;b1.style.opacity='.4'} if(b2){b2.disabled=true;b2.style.opacity='.4'}
+    var n=document.getElementById('pw-expiry-notice'); if(n)n.style.display='block';
 }
 
-/* ==============================
-   タスク切り替え（④: localStorage 永続化）
-============================== */
-function toggleTask(el) {
-    const checked = el.classList.toggle('checked');
-    saveTasks();
-    updateProgress();
-}
+function toggleTask(el){el.classList.toggle('checked');saveTasks();updateProgress()}
+function saveTasks(){var s={};document.querySelectorAll('.task-item').forEach(function(el){var id=el.getAttribute('data-task');if(id)s[id]=el.classList.contains('checked')});try{localStorage.setItem(STORAGE_KEY,JSON.stringify(s))}catch(e){}}
+function restoreTasks(){var s={};try{s=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch(e){}document.querySelectorAll('.task-item').forEach(function(el){var id=el.getAttribute('data-task');if(id&&s[id])el.classList.add('checked')})}
+function updateProgress(){var a=document.querySelectorAll('.task-item').length,d=document.querySelectorAll('.task-item.checked').length,p=a===0?0:Math.round(d/a*100);document.getElementById('progressBar').style.width=p+'%';if(p===100)celebrate()}
 
-/* ==============================
-   localStorage 保存・復元
-============================== */
-function saveTasks() {
-    const state = {};
-    document.querySelectorAll('.task-item').forEach(function (el) {
-        const id = el.getAttribute('data-task');
-        if (id) state[id] = el.classList.contains('checked');
-    });
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
-}
+function updateSfMsg(){var t=document.getElementById('top5-input').value.trim();var m='吉浦さん、お疲れ様です！\nストレングスファインダーの結果が出ました。\n\n【私の34資質】\n'+(t||'（上の欄に入力すると自動反映されます）')+'\n\nよろしくお願いします！';document.getElementById('val-sf-msg').textContent=m}
+function updateMbtiMsg(){var t=document.getElementById('mbti-input').value.trim();var m='吉浦さん、お疲れ様です！\nMBTIの結果が出ました。\n\n【私のタイプ】\n'+(t||'（上の欄に入力すると自動反映されます）')+'\n\nよろしくお願いします！';document.getElementById('val-mbti-msg').textContent=m}
 
-function restoreTasks() {
-    let state = {};
-    try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) {}
-    document.querySelectorAll('.task-item').forEach(function (el) {
-        const id = el.getAttribute('data-task');
-        if (id && state[id]) el.classList.add('checked');
-    });
-}
+function copyVal(id,btn){var t=document.getElementById(id).textContent.trim();navigator.clipboard.writeText(t).then(function(){var o=btn.innerHTML;btn.innerHTML='<span class="material-icons" style="font-size:16px">check</span>コピー完了';btn.classList.add('ok');showToast('コピーしました');setTimeout(function(){btn.innerHTML=o;btn.classList.remove('ok')},2000)}).catch(function(){showToast('コピーに失敗しました')})}
+function showToast(msg){var t=document.getElementById('copyToast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},1800)}
 
-/* ==============================
-   進捗バー更新
-============================== */
-function updateProgress() {
-    const all   = document.querySelectorAll('.task-item').length;
-    const done  = document.querySelectorAll('.task-item.checked').length;
-    const pct   = all === 0 ? 0 : Math.round(done / all * 100);
-    document.getElementById('progressBar').style.width = pct + '%';
-    if (pct === 100) celebrate();
-}
-
-/* ==============================
-   コピーボタン（③: 値だけコピー）
-============================== */
-function copyVal(elemId, btn) {
-    const text = document.getElementById(elemId).textContent.trim();
-    navigator.clipboard.writeText(text).then(function () {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<span class="material-icons" style="font-size:16px;">check</span>コピー完了';
-        btn.classList.add('ok');
-        showToast('コピーしました');
-        setTimeout(function () { btn.innerHTML = orig; btn.classList.remove('ok'); }, 2000);
-    }).catch(function () {
-        showToast('コピーに失敗しました');
-    });
-}
-
-/* 入力欄の値をコピー（input要素用） */
-function copyInputVal(inputId, btn) {
-    var val = (document.getElementById(inputId) || {}).value || '';
-    if (!val.trim()) { showToast('パスワードを入力してください'); return; }
-    navigator.clipboard.writeText(val.trim()).then(function () {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<span class="material-icons" style="font-size:16px;">check</span>コピー完了';
-        btn.classList.add('ok');
-        showToast('コピーしました');
-        setTimeout(function () { btn.innerHTML = orig; btn.classList.remove('ok'); }, 2000);
-    }).catch(function () {
-        showToast('コピーに失敗しました');
-    });
-}
-
-function showToast(msg) {
-    const t = document.getElementById('copyToast');
-    t.textContent = msg; t.classList.add('show');
-    setTimeout(function () { t.classList.remove('show'); }, 1800);
-}
-
-/* ==============================
-   完了演出
-============================== */
-function celebrate() {
-    if (document.body.classList.contains('completed')) return;
-    document.body.classList.add('completed');
-    const colors = ['#FFE000','#009DD5','#E76112','#FFFFFF'];
-    for (let i = 0; i < 120; i++) {
-        const c = document.createElement('div');
-        c.classList.add('confetti');
-        c.style.left = Math.random() * 100 + 'vw';
-        c.style.top  = '-10px';
-        c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        c.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        document.body.appendChild(c);
-    }
-    // 紙吹雪から1.5秒後に非公開確認モーダルを表示
-    setTimeout(openUnpublishModal, 1500);
-}
-
-/* ==============================
-   非公開ポップアップ
-============================== */
-function openUnpublishModal() {
-    var m = document.getElementById('unpublishModal');
-    if (m) { m.style.display = 'flex'; }
-}
-
-function closeUnpublishModal() {
-    var m = document.getElementById('unpublishModal');
-    if (m) { m.style.display = 'none'; }
-}
-
-function showUnpublishCmd() {
-    document.getElementById('unpublishCmd').style.display = 'block';
-    document.getElementById('unpublishYesBtn').style.display = 'none';
-}
-
-function copyUnpublishCmd() {
-    var text = document.getElementById('unpublishCmdText').textContent.trim();
-    navigator.clipboard.writeText(text).then(function() {
-        showToast('コマンドをコピーしました');
-    });
-}
-
-/* ==============================
-   廣瀬さんへの報告文リアルタイム更新
-============================== */
-function updatePwReport() {
-    var mailPw  = document.getElementById('input-new-mailpw')  ? document.getElementById('input-new-mailpw').value.trim()  : '';
-    var slackPw = document.getElementById('input-new-slackpw') ? document.getElementById('input-new-slackpw').value.trim() : '';
-    var mailLine  = mailPw  ? mailPw  : '（未入力）';
-    var slackLine = slackPw ? slackPw : '（未入力）';
-    var msg = '廣瀬さん、こんにちは。火山です。\nパスワードを変更しましたのでご報告します。\n\nロリポップ メールパスワード：' + mailLine + '\nSlack パスワード：' + slackLine;
-    var el = document.getElementById('val-pw-report');
-    if (el) el.textContent = msg;
-}
-
-/* ==============================
-   支給品エリアを画像として保存
-============================== */
-function saveKeyBoxAsImage(btn) {
-    var el = document.getElementById('key-box-capture');
-    if (!el || typeof html2canvas === 'undefined') { showToast('保存に失敗しました'); return; }
-    var origBtn = btn.innerHTML;
-    btn.innerHTML = '<span class="material-icons" style="font-size:18px;color:#fff;">hourglass_top</span>生成中...';
-    btn.disabled = true;
-    html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(function(canvas) {
-        var link = document.createElement('a');
-        link.download = '支給された情報.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast('画像を保存しました');
-        btn.innerHTML = origBtn;
-        btn.disabled = false;
-    }).catch(function() {
-        showToast('保存に失敗しました');
-        btn.innerHTML = origBtn;
-        btn.disabled = false;
-    });
-}
-
-/* ==============================
-   管理者用アップデート
-============================== */
-function copyHtmlForUpdate() {
-    const html   = document.documentElement.outerHTML;
-    const prompt = '【修正依頼】\n以下のHTMLマニュアルを最新仕様に合わせてアップデートしてください。\nデザイン・構成は変更せず、テキストや手順の中身だけを最新化してください。\n\n--- HTML Code ---\n' + html;
-    navigator.clipboard.writeText(prompt).then(function () {
-        alert('更新プロンプトをコピーしました！\nGemini / ChatGPT に貼り付けて最新化を実行してください。');
-    });
-}
+function celebrate(){if(document.body.classList.contains('completed'))return;document.body.classList.add('completed');var c=['#FFE000','#009DD5','#E76112','#FFFFFF'];for(var i=0;i<120;i++){var d=document.createElement('div');d.classList.add('confetti');d.style.left=Math.random()*100+'vw';d.style.top='-10px';d.style.backgroundColor=c[Math.floor(Math.random()*c.length)];d.style.animationDuration=(Math.random()*3+2)+'s';document.body.appendChild(d)}setTimeout(openUnpublishModal,1500)}
+function openUnpublishModal(){var m=document.getElementById('unpublishModal');if(m)m.style.display='flex'}
+function closeUnpublishModal(){var m=document.getElementById('unpublishModal');if(m)m.style.display='none'}
+function showUnpublishCmd(){document.getElementById('unpublishCmd').style.display='block';document.getElementById('unpublishYesBtn').style.display='none'}
+function copyUnpublishCmd(){navigator.clipboard.writeText(document.getElementById('unpublishCmdText').textContent.trim()).then(function(){showToast('コマンドをコピーしました')})}
+function saveKeyBoxAsImage(btn){var el=document.getElementById('key-box-capture');if(!el||typeof html2canvas==='undefined'){showToast('保存に失敗しました');return}var o=btn.innerHTML;btn.innerHTML='<span class="material-icons" style="font-size:18px;color:#fff">hourglass_top</span>生成中...';btn.disabled=true;html2canvas(el,{scale:2,useCORS:true,backgroundColor:'#fff'}).then(function(c){var a=document.createElement('a');a.download='支給された情報.png';a.href=c.toDataURL('image/png');a.click();showToast('画像を保存しました');btn.innerHTML=o;btn.disabled=false}).catch(function(){showToast('保存に失敗しました');btn.innerHTML=o;btn.disabled=false})}
+function copyHtmlForUpdate(){var h=document.documentElement.outerHTML;navigator.clipboard.writeText('【修正依頼】\n以下のHTMLマニュアルを最新仕様に合わせてアップデートしてください。\n\n--- HTML Code ---\n'+h).then(function(){alert('更新プロンプトをコピーしました！')})}
 </script>
 </body>
 </html>
